@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>{{title}}</title>
+
+    {# Bootstrap #}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    {# Fontawesome #}
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+
+    {# my stylesheet #}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+
+    {% block script %}{% endblock %}
+
+
+<!--    <script>-->
+
+<!--        $(document).ready(function () {-->
+<!--            var divs = $('.mydiv');-->
+<!--            var dir = 'up'; // wheel scroll direction-->
+<!--            var div = 0; // current div-->
+<!--            $(document.body).on('DOMMouseScroll mousewheel', function (e) {-->
+<!--                if (e.originalEvent.detail > 0 || e.originalEvent.wheelDelta < 0) {-->
+<!--                    dir = 'down';-->
+<!--                } else {-->
+<!--                    dir = 'up';-->
+<!--                }-->
+<!--                // find currently visible div :-->
+<!--                div = -1;-->
+<!--                divs.each(function(i){-->
+<!--                    if (div<0 && ($(this).offset().top >= $(window).scrollTop())) {-->
+<!--                        div = i;-->
+<!--                    }-->
+<!--                });-->
+<!--                if (dir == 'up' && div > 0) {-->
+<!--                    div&#45;&#45;;-->
+<!--                }-->
+<!--                if (dir == 'down' && div < divs.length) {-->
+<!--                    div++;-->
+<!--                }-->
+<!--                //console.log(div, dir, divs.length);-->
+<!--                $('html,body').stop().animate({-->
+<!--                    scrollTop: divs.eq(div).offset().top-->
+<!--                }, 200);-->
+<!--                return false;-->
+<!--            });-->
+<!--            $(window).resize(function () {-->
+<!--                $('html,body').scrollTop(divs.eq(div).offset().top);-->
+<!--            });-->
+<!--        });-->
+
+<!--    </script>-->
+
+
+
+</head>
+<body>
+
+    {% for message in get_flashed_messages() %}
+
+        <div class="alert alert-info alert-dismissible" style="position:fixed; z-index:9999; right:2px; top:2px;">
+            <span type="text" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>
+            {{ message }}
+        </div>
+    {% endfor%}
+
+    {% block main %}{% endblock %}
+
+</body>
+</html>

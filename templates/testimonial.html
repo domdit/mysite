@@ -1,0 +1,166 @@
+{% extends "layout.html" %}
+
+{% set active_page = "test" %}
+
+{% include "admin_template.html" %}
+
+{% block main %}
+
+<div class="container" >
+    <form action="" method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Update Portfolio</legend>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {{ form.name.label(class="form-control-label") }}
+                            {{ form.name(class="form-control form-control-md") }}
+                            {% if form.name.errors %}
+                                {% for error in form.name.errors %}
+                                    <span class="text-danger">{{ error }}</span></br>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {{ form.site_name.label(class="form-control-label") }}
+                            {{ form.site_name(class="form-control form-control-md") }}
+                            {% if form.site_name.errors %}
+                                {% for error in form.site_name.errors %}
+                                    <span class="text-danger">{{ error }}</span></br>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {{ form.portfolio_id.label(class="form-control-label") }}
+                            {{ form.portfolio_id(class="form-control form-control-md") }}
+                            {% if form.portfolio_id.errors %}
+                                {% for error in form.portfolio_id.errors %}
+                                    <span class="text-danger">{{ error }}</span></br>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {{ form.url.label(class="form-control-label") }}
+                            {{ form.url(class="form-control form-control-md") }}
+                            {% if form.url.errors %}
+                                {% for error in form.url.errors %}
+                                    <span class="text-danger">{{ error }}</span></br>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    {{ form.text.label(class="form-control-label") }}
+                    {{ form.text(class="form-control form-control-md") }}
+                </div>
+
+                <div class="form-group">
+                    {{ form.folder.label(class="form-control-label") }}
+                    {{ form.folder(class="form-control form-control-md") }}
+                    {% if form.folder.errors %}
+                        {% for error in form.folder.errors %}
+                            <span class="text-danger">{{ error }}</span></br>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            {{ form.img.label() }}
+                            {{ form.img(class="form-control-file") }}
+                            {% if form.img.errors %}
+                                {% for error in form.img.errors %}
+                                    <span class="text-danger">{{ error }}</span></br>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+
+                </div>
+
+
+        </fieldset>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-secondary") }}
+        </div>
+    </form>
+</div>
+
+<hr>
+
+<div class="container" >
+
+
+    {% for item in test_items %}
+
+    <div style="width: 75%;" class="testimonial shadow p-3 mb-5 bg-light rounded mx-auto d-none d-sm-none d-md-block">
+
+        <img src="/static/img/testimonial/{{item.folder}}/img.png" class=" float-left testimonial-img">
+
+        <h1> {{item.name}} </h1>
+        <h2> <a href="www.sianstreetfood.com">{{item.site_name}}</a> </h2>
+
+        <p>
+            {{item.text}}
+
+        <br>
+
+        <span class="float-right">
+            <a class="test-link" href="{{item.url}}">visit site</a> | <a class="test-link" href="#">portfolio entry</a>
+        </span>
+        </p>
+
+    </div>
+
+
+    <div style="width: 80%;" class="testimonial shadow p-3 mb-5 bg-light rounded mx-auto d-block d-sm-block d-xs-block d-md-none">
+
+        <center>
+
+            <img src="/static/img/testimonial/{{item.folder}}/img.png" class=" mx-auto testimonial-img">
+
+            <br>
+
+            <h1>{{item.name}}</h1>
+            <h2> <a href="www.sianstreetfood.com">{{item.site_name}}</a> </h2>
+
+
+
+        </center>
+
+
+        <p>
+            {{item.text}}
+        <br>
+
+        <span class="float-right">
+            <a class="test-link" href="{{item.url}}">visit site</a> | <a class="test-link" href="#">portfolio entry</a>
+        </span>
+        </p>
+
+    </div>
+    {% else %}
+
+    {% endfor %}
+
+</div>
+
+
+
+{% endblock %}

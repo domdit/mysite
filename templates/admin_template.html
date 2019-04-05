@@ -1,0 +1,53 @@
+{% block script%}
+
+<!--    {# TinyMCE #}-->
+<!--    <script src="https://cloud.tinymce.com/5/tinymce.min.js?apiKey=666y222z8n2iljdtmetub442mdezzf4a1qtk2eskok9vnj3s"></script>-->
+
+<!--    <script>-->
+<!--        tinymce.init({-->
+<!--            selector: 'textarea',-->
+<!--            plugins: 'a11ychecker advcode casechange formatpainter linkchecker lists checklist media mediaembed pageembed permanentpen powerpaste tinycomments tinydrive tinymcespellchecker',-->
+<!--            toolbar: 'a11ycheck addcomment showcomments casechange checklist code formatpainter insertfile pageembed permanentpen',-->
+<!--            toolbar_drawer: 'sliding',-->
+<!--            tinycomments_mode: 'embedded',-->
+<!--            tinycomments_author: 'Author name',-->
+<!--            plugins: "lists",-->
+<!--            toolbar: "numlist bullist"-->
+<!--        });-->
+
+<!--    </script>-->
+
+{% endblock %}
+    <div class="container border-left border-right bg-white" style="height:auto;">
+
+        <div>
+
+
+            <h1 class="admin-header">DOMDIT.COM - Admin Tools</h1>
+
+            <hr>
+
+        </div>
+
+        <small>*Admin tools should be manipulated on the desktop, you will lose some functionality on mobile</small>
+
+        <div class="list-group m-3" style="max-width: 300px;">
+
+
+            <a class="list-group-item py-1 list-group-item-action {{ 'active' if active_page == 'portfolio' else '' }}"
+               href="{{url_for('portfolio')}}">Update Portfolio</a>
+
+            <a class="list-group-item py-1 list-group-item-action {{ 'active' if active_page == 'test' else '' }}"
+               href="{{url_for('testimonial')}}">Update Testimonials</a>
+
+            <a class="list-group-item py-1 list-group-item-action {{ 'active' if active_page == 'admin' else '' }}"
+               href="{{url_for('new_admin')}}">Create New Administrative Account</a>
+
+            <a class="list-group-item py-1 list-group-item-action"
+               href="http://webmail.domdit.com" target="_blank">Email</a>
+
+            <a class="list-group-item py-1 list-group-item-action"
+               href="{{url_for('logout')}}">Logout</a>
+
+        </div>
+
