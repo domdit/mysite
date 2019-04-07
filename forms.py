@@ -41,6 +41,7 @@ class PortfolioForm(FlaskForm):
     short_description = StringField('Short Description:', validators=[DataRequired()])
     description = TextAreaField('Description:')
     url = StringField('Full url:', validators=[DataRequired()])
+    git = StringField('git URL:', validators=[DataRequired()])
     folder = StringField('Image Folder Name:', validators=[DataRequired()])
     thumb = FileField('Thumbnail:', validators=[FileAllowed(['jpg', 'png', 'gif'])])
     img1 = FileField('Image 1:', validators=[FileAllowed(['jpg', 'png', 'gif'])])

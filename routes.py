@@ -100,6 +100,7 @@ def portfolio():
                                        short_description=form.short_description.data,
                                        description=form.description.data,
                                        url=form.url.data,
+                                       git=form.git.data,
                                        folder=form.folder.data
                                        )
 

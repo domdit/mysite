@@ -69,15 +69,37 @@
                     {{ form.description(class="form-control form-control-md") }}
                 </div>
 
-                <div class="form-group">
-                    {{ form.folder.label(class="form-control-label") }}
-                    {{ form.folder(class="form-control form-control-md") }}
-                    {% if form.folder.errors %}
-                        {% for error in form.folder.errors %}
-                            <span class="text-danger">{{ error }}</span></br>
-                        {% endfor %}
-                    {% endif %}
+                <div class="row">
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {{ form.folder.label(class="form-control-label") }}
+                        {{ form.folder(class="form-control form-control-md") }}
+                        {% if form.folder.errors %}
+                            {% for error in form.folder.errors %}
+                                <span class="text-danger">{{ error }}</span></br>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+
                 </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {{ form.git.label(class="form-control-label") }}
+                        {{ form.git(class="form-control form-control-md") }}
+                        {% if form.git.errors %}
+                            {% for error in form.git.errors %}
+                                <span class="text-danger">{{ error }}</span></br>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+
+                </div>
+
+                </div>
+
+
 
                 <div class="row">
                     <div class="col-md-3">

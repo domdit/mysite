@@ -32,6 +32,7 @@ class Portfolio(db.Model):
     short_description = db.Column(db.String(200), unique=False, nullable=False)
     description = db.Column(db.Text)
     url = db.Column(db.String(200), unique=False, nullable=False)
+    git = db.Column(db.String(200), unique=False, nullable=False)
     folder = db.Column(db.String(200), unique=True, nullable=False)
 
 

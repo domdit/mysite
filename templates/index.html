@@ -206,7 +206,7 @@
 
                                 <div class="modal-content">
 
-                                    <div class="modal-body">
+                                    <center><div class="modal-body">
 
                                         <div id="modal-{{item.id}}-carouselIndicators" class="carousel slide" data-ride="carousel">
                                           <ol class="carousel-indicators">
@@ -235,16 +235,17 @@
                                           </a>
                                         </div>
 
-                                        <hr>
-                                        <h1>{{item.name}}</h1>
-                                        <h2>{{item.short_description}}</h2>
-                                        <hr>
+                                            <hr>
+                                            <h1 class="text-left">{{item.name}}</h1>
+                                            <h2 class="text-left">{{item.short_description}}</h2>
+                                            <hr>
 
-                                        <p>
-                                            {{item.description}}
-                                        </p>
+                                            <p class="text-left">
+                                                {{item.description}}
+                                            </p>
 
-                                        <a class="btn btn-custom" href="{{item.url}}" target="_blank">Visit Site</a>
+                                            <a class="btn btn-custom" href="{{item.url}}" target="_blank">Visit Site</a>
+                                            <a class="btn btn-dark" href="{{item.git}}" target="_blank">View on Github</a>
 
                                     </div>
 
@@ -287,7 +288,7 @@
                 <br>
 
                 <span class="float-right">
-                    <a class="test-link" href="{{item.url}}">visit site</a> | <a class="test-link" data-target="#modal_{{item.portfolio_id}}" data-toggle="modal">portfolio entry</a>
+                    <a class="test-link" href="{{item.url}}">visit site</a> | <a class="test-link" href="#port">portfolio entry</a>
                 </span>
                 </p>
 
