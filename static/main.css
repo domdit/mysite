@@ -131,6 +131,7 @@ h4 {
     margin-left: auto;
 
     max-width:250px;
+    min-width:200px
     width: fit-content;
     padding: 6px;
     padding-left:10px;

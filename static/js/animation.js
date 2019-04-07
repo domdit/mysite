@@ -16,7 +16,6 @@ window.onload = function() {
         var test = $('.testimonial');
 
         var homeOff= $('.header').offset().top;
-        var home = $('.header');
 
         if (scroll >= (homeOff / dist)) {
             $('#home-link').addClass('active');
@@ -38,10 +37,18 @@ window.onload = function() {
             $('#about-link').addClass('active');
             $('#home-link').removeClass('active');
 
+            if (window.innerWidth < 600) {
+                $('.skill-item-container').removeClass('col-3');
+                $('.skill-item-container').addClass('col-6');
+            } else {
+                $('.skill-item-container').addClass('col-3');
+                $('.skill-item-container').removeClass('col-6');
+            }
+
 
             setTimeout(function(){
                 $('#skill1').removeClass('my-none');
-                $('#skill-head').removeClass('d-none');
+                $('#skill-head').removeClass('my-none');
                 $('#skill1').addClass('animated bounceIn');
                 }, 250);
             setTimeout(function(){
