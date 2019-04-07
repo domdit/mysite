@@ -1,11 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800|Raleway:400,500');
 
 :root{
-    --bermuda: #85DCBA;
-    --puertorico: #41B3A3;
-    --terracotta: #E27D60;
-    --tumbleweed: #E8A87C;
+
     --viola: #C38D9E;
+    --primary-color: #585b7b;
+    --light-primary: #747494;
+    --accent-color: #adb1d5;
+    --greyish: #7c8494;
+    --light-color: #f6f6fb;
 
     --header-font: 'Montserrat', sans-serif;
     --main-font: 'Raleway', sans-serif;
@@ -14,22 +16,38 @@
 
 html{
     scroll-behavior: smooth;
+    max-width: 100vw;
 }
 
 body{
     position: relative;
+    max-width: 100vw;
 }
 
-.header{
-    background-color: var(--puertorico);
-    height: 100vh;
-    background-image: url("https://www.transparenttextures.com/patterns/clean-gray-paper.png");
-
-    padding-top: 50px;
-
-    -webkit-clip-path: polygon(50% 0%, 100% 0, 100% 90%, 52% 100%, 0 90%, 0 0);
-    clip-path: polygon(50% 0%, 100% 0, 100% 90%, 52% 100%, 0 90%, 0 0);
+@media (max-width: 576px) {
+    .header {
+        background-color: var(--primary-color);
+        min-height: 100vh;
+        background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
+        padding-top: 50px;
+    }
 }
+
+@media (min-width: 576px){
+    .header{
+        background-color: var(--primary-color);
+        height: 100vh;
+        background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
+        padding-top: 50px;
+        margin-bottom: 30px;
+
+        -webkit-clip-path: polygon(50% 0%, 100% 0, 100% 90%, 52% 100%, 0 90%, 0 0);
+        clip-path: polygon(50% 0%, 100% 0, 100% 90%, 52% 100%, 0 90%, 0 0);
+    }
+
+}
+
+
 
 .my-img {
 
@@ -51,7 +69,7 @@ h1 {
     font-size: 225%;
     font-weight: 800;
     text-transform: uppercase;
-    color: #fff;
+    color: var(--light-color);
     margin: auto;
 }
 
@@ -59,7 +77,7 @@ h2  {
     font-family: var(--header-font);
     font-size: 170%;
     text-transform: uppercase;
-    color: #fff;
+    color: var(--light-color);
     margin: auto;
 
 }
@@ -73,7 +91,7 @@ h3 {
 }
 
 h4 {
-    color: #fff;
+    color: var(--light-color);
     font-family: var(--main-font);
 
     font-size: 1.1em;
@@ -93,18 +111,18 @@ h4 {
 }
 
 .abt-btn:hover{
-    color: var(--bermuda);
+    color: var(--accent-color);
 
 }
 
 .abt-btn{
-    color: var(--puertorico)
+    color: var(--primary-color)
 
 }
 
 .skill-item{
     background-color: var(--viola);
-    color: white;
+    color: var(--light-color);
     font-size:1.3em;
     font-weight: bold;
     font-family: var(--main-font);
@@ -170,7 +188,7 @@ h4 {
 
 .testimonial h2 {
     font-size: 1.2em;
-    color: var(--bermuda);
+    color: var(--accent-color);
     font-weight: normal;
 
 }
@@ -178,13 +196,13 @@ h4 {
 .testimonial h2 > a:link,
 .testimonial h2 > a:visited,
 .test-link:link, .test-link:visited {
-    color: var(--puertorico);
+    color: var(--primary-color);
     text-decoration: none;
 }
 
 .testimonial h2 > a:hover,
 .test-link:hover {
-    color: var(--bermuda);
+    color: var(--accent-color);
     text-decoration: none;
 }
 
@@ -196,7 +214,7 @@ main {
 
 .contact{
     min-height: 620px;
-    background-color: var(--puertorico);
+    background-color: var(--light-primary);
     background-image: url("https://www.transparenttextures.com/patterns/nami.png");    display: flex;
     align-items: center;
 
@@ -205,7 +223,7 @@ main {
 .contact > div {
     margin: auto;
     max-width:500px;
-    color: var(--tumbleweed);
+    color: var(--primary-color);
 }
 
 .contact-input > .form-group > input[type=text],
@@ -219,7 +237,7 @@ main {
 }
 
 .contact-input > .form-group > input[type=text]:focus{
-    border: 2px solid var(--bermuda)
+    border: 2px solid var(--primary-color)
 }
 
 .contact-input > .form-group > textarea.form-control,
@@ -236,16 +254,16 @@ main {
 }
 
 .contact-input > .form-group > textarea.form-control:focus{
-    border: 2px solid var(--bermuda)
+    border: 2px solid var(--accent-color)
 }
 
 button.custom{
     background-color: #515151;
-    color: #fff;
+    color: var(--light-color);
 }
 
 button.custom:hover{
-    background-color: var(--bermuda);
+    background-color: var(--accent-color);
 }
 
 .card{
@@ -274,9 +292,26 @@ button.custom:hover{
     width: 100%;
     opacity: 0;
     transition: .5s ease;
-    background-color: #fff;
+    background-color: var(--light-color);
     padding: auto;
 }
+
+@-webkit-keyframes header-slidein {
+    from {transform: translateX(50px); opacity:0;}
+    to {transform: translateX(00px); opacity:1;}
+}
+
+@-webkit-keyframes btn-slidein {
+    from {transform: translateY(70px); opacity:0;}
+    to {transform: translateY(00px); opacity:1;}
+}
+
+@-webkit-keyframes info-slidein {
+    from {transform: translateY(200px); opacity: 0;}
+    50% {transform: translateY(-10px);}
+    to {transform: translateY(00px); opacity:1;}
+}
+
 
 @keyframes header-slidein {
     from {transform: translateX(50px); opacity:0;}
@@ -315,7 +350,7 @@ button.custom:hover{
 .overlay > center > p {
     margin: auto;
     margin-top:10px;
-    color: var(--bermuda);
+    color: var(--accent-color);
     font-weight: 500;
 
 }
@@ -332,15 +367,15 @@ button.custom:hover{
     position: absolute;
     top: 200px;
     left: 80px;
-    border: 2px solid var(--bermuda);
+    border: 2px solid var(--accent-color);
 }
 
 .overlay > center > .btn-custom:hover {
     position: absolute;
     top: 200px;
     left: 80px;
-    background-color: var(--bermuda);
-    border: 2px solid var(--bermuda);
+    background-color: var(--accent-color);
+    border: 2px solid var(--accent-color);
 }
 
 .modal-body > img{
@@ -373,14 +408,14 @@ button.custom:hover{
 
 a > .btn, .btn-custom {
     margin-left: 20px;
-    border: 2px solid var(--tumbleweed);
+    border: 2px solid var(--viola);
 
 }
 
 a > .btn:hover, .btn-custom:hover {
     margin-left: 20px;
-    border: 2px solid var(--tumbleweed);
-    background-color: var(--tumbleweed);
+    border: 2px solid var(--viola);
+    background-color: var(--viola);
 
 }
 
@@ -402,14 +437,14 @@ a > .btn:hover, .btn-custom:hover {
     cursor: pointer;
     border: none;
     border-radius: 50%;
-    background-color: var(--bermuda);
+    background-color: var(--accent-color);
     box-shadow: inset 1px 1px 1px 1px rgba(0,0,0,0.5);
 }
 .carousel-indicators .active {
     width: 10px;
     height: 10px;
     margin: 10px;
-    background-color: var(--bermuda);
+    background-color: var(--accent-color);
 }
 
 .align-items-center {
@@ -425,25 +460,25 @@ a > .btn:hover, .btn-custom:hover {
 }
 
 .footer{
-    border-top: var(--puertorico) solid 1px;
+    border-top: var(--primary-color) solid 1px;
     height: auto;
 }
 
 .footer > div > center>  a:link {
     font-family: var(--main-font);
-    color: var(--terracotta);
+    color: var(--accent-color);
     margin-right: 10px;
 }
 
 .footer > div > center>  a:visited {
     font-family: var(--main-font);
-    color: var(--terracotta);
+    color: var(--accent-color);
     margin-right: 10px;
 }
 
 .footer > div > center>  a:hover {
     font-family: var(--main-font);
-    color: var(--tumbleweed);
+    color: var(--viola);
     margin-right: 10px;
     text-decoration: none;
 }
@@ -454,32 +489,32 @@ a > .btn:hover, .btn-custom:hover {
 }
 
 .buttons > a:link{
-    color: var(--terracotta);
+    color: var(--accent-color);
     margin-right:15px;
 
 }
 
 .buttons > a:visited{
-    color: var(--terracotta);
+    color: var(--accent-color);
     margin-right:15px;
 
 }
 
 .buttons a:hover {
     font-family: var(--main-font);
-    color: var(--tumbleweed);
+    color: var(--viola);
     margin-right: 15px;
     text-decoration: none;
 }
 
 .copy {
-    color: white;
+    color: var(--light-color);
     margin-top: 70px;
 
 }
 
 .copy > small > a:link {
-    color: var(--terracotta)
+    color: var(--accent-color)
 
 }
 
@@ -489,156 +524,153 @@ a > .btn:hover, .btn-custom:hover {
 }
 
 
+
+.navbar-custom .nav-item.active .nav-link,
+.navbar-custom .nav-item:hover .nav-link {
+    color: var(--viola);
+}
+
+
 .navbar {
-  background-color: #41b3a3;
+  background-color: var(--light-color);
 }
 .navbar .navbar-brand {
-  color: #ffffff;
+  color: #585b7b;
 }
 .navbar .navbar-brand:hover,
 .navbar .navbar-brand:focus {
-  color: #ffbbbc;
+  color: #adb1d5;
 }
 .navbar .navbar-text {
-  color: #ffffff;
+  color: #585b7b;
 }
 .navbar .navbar-text a {
-  color: #ffbbbc;
+  color: #adb1d5;
 }
 .navbar .navbar-text a:hover,
 .navbar .navbar-text a:focus {
-  color: #ffbbbc;
+  color: #adb1d5;
 }
 .navbar .navbar-nav .nav-link {
-  color: #ffffff;
+  color: #585b7b;
   border-radius: .25rem;
   margin: 0 0.25em;
 }
 .navbar .navbar-nav .nav-link:not(.disabled):hover,
 .navbar .navbar-nav .nav-link:not(.disabled):focus {
-  color: #ffbbbc;
+  color: #adb1d5;
 }
 .navbar .navbar-nav .dropdown-menu {
-  background-color: #41b3a3;
-  border-color: #41b3a3;
+  background-color: #f6f6fb;
+  border-color: #adb1d5;
 }
 .navbar .navbar-nav .dropdown-menu .dropdown-item {
-  color: #ffffff;
+  color: #585b7b;
 }
 .navbar .navbar-nav .dropdown-menu .dropdown-item:hover,
 .navbar .navbar-nav .dropdown-menu .dropdown-item:focus,
-.navbar .navbar-nav .dropdown-menu .dropdown-item.active {
-  color: #ffbbbc;
-  background-color: #41b3a3;
+.navbar .navbar-dark .navbar-nav .dropdown-menu .dropdown-item.active {
+  color: #adb1d5;
+  background-color: #adb1d5;
 }
 .navbar .navbar-nav .dropdown-menu .dropdown-divider {
-  border-top-color: #41b3a3;
+  border-top-color: #adb1d5;
 }
-
-.navbar .navbar-nav .nav-item.active{
-
-    color: var(--viola);
-}
-
-
-
-.navbar .navbar-nav .nav-item.active .nav-link,
-.navbar .navbar-nav .nav-item.active .nav-link:hover,
-.navbar .navbar-nav .nav-item.active .nav-link:focus,
+.navbar .navbar-dark .navbar-nav .nav-item.active .nav-link,
+.navbar .navbar-dark .navbar-nav .nav-item.active .nav-link:hover,
+.navbar .navbar-dark .navbar-nav .nav-item.active .nav-link:focus,
 .navbar .navbar-nav .nav-item.show .nav-link,
 .navbar .navbar-nav .nav-item.show .nav-link:hover,
 .navbar .navbar-nav .nav-item.show .nav-link:focus {
-  color: #ffbbbc;
-  background-color: #41b3a3;
+  color: #adb1d5;
+  background-color: #adb1d5;
 }
-
-
-
 .navbar .navbar-toggle {
-  border-color: #41b3a3;
+  border-color: #adb1d5;
 }
 .navbar .navbar-toggle:hover,
 .navbar .navbar-toggle:focus {
-  background-color: #41b3a3;
+  background-color: #adb1d5;
 }
 .navbar .navbar-toggle .navbar-toggler-icon {
-  color: #ffffff;
+  color: #585b7b;
 }
 .navbar .navbar-collapse,
 .navbar .navbar-form {
-  border-color: #ffffff;
+  border-color: #585b7b;
 }
 .navbar .navbar-link {
-  color: #ffffff;
+  color: #585b7b;
 }
 .navbar .navbar-link:hover {
-  color: #ffbbbc;
+  color: #adb1d5;
 }
 
 @media (max-width: 575px) {
   .navbar-expand-sm .navbar-nav .show .dropdown-menu .dropdown-item {
-    color: #ffffff;
+    color: #585b7b;
   }
   .navbar-expand-sm .navbar-nav .show .dropdown-menu .dropdown-item:hover,
   .navbar-expand-sm .navbar-nav .show .dropdown-menu .dropdown-item:focus {
-    color: #ffbbbc;
+    color: #adb1d5;
   }
-  .navbar-expand-sm .navbar-nav .show .dropdown-menu .dropdown-item.active {
-    color: #ffbbbc;
-    background-color: #41b3a3;
+  .navbar-expand-sm .navbar-nav .navbar-dark .show .dropdown-menu .dropdown-item.active {
+    color: #adb1d5;
+    background-color: #adb1d5;
   }
 }
 
 @media (max-width: 767px) {
   .navbar-expand-md .navbar-nav .show .dropdown-menu .dropdown-item {
-    color: #ffffff;
+    color: #585b7b;
   }
   .navbar-expand-md .navbar-nav .show .dropdown-menu .dropdown-item:hover,
   .navbar-expand-md .navbar-nav .show .dropdown-menu .dropdown-item:focus {
-    color: #ffbbbc;
+    color: #adb1d5;
   }
-  .navbar-expand-md .navbar-nav .show .dropdown-menu .dropdown-item.active {
-    color: #ffbbbc;
-    background-color: #41b3a3;
+  .navbar-expand-md .navbar-nav .navbar-dark .show .dropdown-menu .dropdown-item.active {
+    color: #adb1d5;
+    background-color: #adb1d5;
   }
 }
 
 @media (max-width: 991px) {
   .navbar-expand-lg .navbar-nav .show .dropdown-menu .dropdown-item {
-    color: #ffffff;
+    color: #585b7b;
   }
   .navbar-expand-lg .navbar-nav .show .dropdown-menu .dropdown-item:hover,
   .navbar-expand-lg .navbar-nav .show .dropdown-menu .dropdown-item:focus {
-    color: #ffbbbc;
+    color: #adb1d5;
   }
-  .navbar-expand-lg .navbar-nav .show .dropdown-menu .dropdown-item.active {
-    color: #ffbbbc;
-    background-color: #41b3a3;
+  .navbar-expand-lg .navbar-nav .navbar-dark .show .dropdown-menu .dropdown-item.active {
+    color: #adb1d5;
+    background-color: #adb1d5;
   }
 }
 
 @media (max-width: 1199px) {
   .navbar-expand-xl .navbar-nav .show .dropdown-menu .dropdown-item {
-    color: #ffffff;
+    color: #585b7b;
   }
   .navbar-expand-xl .navbar-nav .show .dropdown-menu .dropdown-item:hover,
   .navbar-expand-xl .navbar-nav .show .dropdown-menu .dropdown-item:focus {
-    color: #ffbbbc;
+    color: #adb1d5;
   }
-  .navbar-expand-xl .navbar-nav .show .dropdown-menu .dropdown-item.active {
-    color: #ffbbbc;
-    background-color: #41b3a3;
+  .navbar-expand-xl .navbar-nav .navbar-dark .show .dropdown-menu .dropdown-item.active {
+    color: #adb1d5;
+    background-color: #adb1d5;
   }
 }
 
 .navbar-expand .navbar-nav .show .dropdown-menu .dropdown-item {
-  color: #ffffff;
+  color: #585b7b;
 }
 .navbar-expand .navbar-nav .show .dropdown-menu .dropdown-item:hover,
 .navbar-expand .navbar-nav .show .dropdown-menu .dropdown-item:focus {
-  color: #ffbbbc;
+  color: #adb1d5;
 }
-.navbar-expand .navbar-nav .show .dropdown-menu .dropdown-item.active {
-  color: #ffbbbc;
-  background-color: #41b3a3;
+.navbar-expand .navbar-nav .navbar-dark .show .dropdown-menu .dropdown-item.active {
+  color: #adb1d5;
+  background-color: #adb1d5;
 }
+
