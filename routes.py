@@ -13,6 +13,17 @@ from datetime import datetime
 def load_user(user_id):
     return User.query.get(user_id)
 
+@app.template_filter('autoversion')
+def autoversion_filter(filename):
+    fullpath = os.path.join('domdit/static', filename[1:])
+    try:
+        timestamp = str(os.path.getmtime(fullpath))
+    except OSError:
+        return filename
+
+    newfile = "{0}?v={1}".format(filename, timestamp)
+    return newfile
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
 
