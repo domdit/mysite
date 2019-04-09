@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, SubmitField, FileField, PasswordField, IntegerField
 from flask_wtf.file import FileAllowed
-from flask_wtf.recaptcha import RecaptchaField
+from flask_wtf import RecaptchaField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from domdit.models import User
 
