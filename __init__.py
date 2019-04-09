@@ -3,7 +3,7 @@ from flask_mail import Mail
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
-
+from flask_recaptcha import ReCaptcha
 
 import os
 
@@ -17,15 +17,22 @@ app.config["MAIL_USERNAME"] = os.getenv('EMAIL_USER')
 app.config["MAIL_PASSWORD"] = os.getenv('EMAIL_PASS')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['RECAPTCHA_PUBLIC_KEY'] = os.getenv('RECAPTCHA_PUBLIC')
-app.config['RECAPTCHA_SECRET_KEY'] = os.getenv('RECAPTCHA_SECRET')
-app.config['RECAPTCHA_ENABLED'] = True
-app.config['TESTING'] = False
 
 
 db = SQLAlchemy(app)
 mail = Mail(app)
 bcrypt = Bcrypt(app)
+
+recaptcha = ReCaptcha()
+recaptcha.is_enabled = True
+recaptcha.site_key = os.getenv('RECAPTCHA_PUBLIC')
+recaptcha.secret_key = os.getenv('RECAPTCHA_SECRET')
+recaptcha.theme = 'dark'
+recaptcha.type = 'image'
+recaptcha.size = 'compact'
+recaptcha.tabindex = 0
+recaptcha.init_app(app)
+
 
 
 

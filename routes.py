@@ -1,7 +1,7 @@
 from flask import render_template, request, flash, redirect, url_for, current_app
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
-from domdit import app, mail, db, bcrypt, login_manager
+from domdit import app, mail, db, bcrypt, login_manager, recaptcha
 from domdit.forms import Email, PortfolioForm, AdminForm, Login, TestimonialForm
 from domdit.models import Portfolio, User, Testimonial
 from domdit.utils import portfolio_img_uploader
