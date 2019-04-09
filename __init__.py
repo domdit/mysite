@@ -3,7 +3,7 @@ from flask_mail import Mail
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
-from flask_recaptcha import ReCaptcha
+
 
 import os
 
@@ -25,7 +25,7 @@ app.config['RECAPTCHA_ENABLED'] = True
 db = SQLAlchemy(app)
 mail = Mail(app)
 bcrypt = Bcrypt(app)
-recaptcha = ReCaptcha(app=app)
+
 
 
 login_manager = LoginManager()
