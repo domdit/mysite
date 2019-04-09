@@ -33,7 +33,7 @@ class Email(FlaskForm):
     name = StringField('Name', validators=[DataRequired(), Length(min=1, max=50)])
     email = StringField('Email', validators=[DataRequired(), Email()])
     message = TextAreaField('Message', validators=[DataRequired()])
-    recaptcha = RecaptchaField()
+    recaptcha = RecaptchaField(validators=[DataRequired()])
     submit = SubmitField('test')
 
 
