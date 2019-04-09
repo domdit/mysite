@@ -27,9 +27,9 @@ recaptcha = ReCaptcha()
 recaptcha.is_enabled = True
 recaptcha.site_key = os.getenv('RECAPTCHA_PUBLIC')
 recaptcha.secret_key = os.getenv('RECAPTCHA_SECRET')
-recaptcha.theme = 'dark'
+recaptcha.theme = 'light'
 recaptcha.type = 'image'
-recaptcha.size = 'compact'
+recaptcha.size = 'normal'
 recaptcha.tabindex = 0
 recaptcha.init_app(app)
 
