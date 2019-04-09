@@ -30,15 +30,16 @@ def index():
     contact_form = Email()
     if request.method == 'POST':
         if request.form['contact_submit'] == 'send':
-            msg = Message("inquiry from domdit.com!", sender='customer@domdit.com', recipients=['me@domdit.com'])
-            msg.body = '''
-            From: %s <%s>
-            %s
-            ''' % (contact_form.name.data, contact_form.email.data, contact_form.message.data)
-            mail.send(msg)
-            flash('Message sent successfully!')
-        else:
-            flash('Message unsuccessful, try again!')
+            if contact_form.validate_on_submit:
+                msg = Message("inquiry from domdit.com!", sender='customer@domdit.com', recipients=['me@domdit.com'])
+                msg.body = '''
+                From: %s <%s>
+                %s
+                ''' % (contact_form.name.data, contact_form.email.data, contact_form.message.data)
+                mail.send(msg)
+                flash('Message sent successfully!')
+            else:
+                flash('Message unsuccessful, try again!')
 
     port_items = Portfolio.query.all()
 
