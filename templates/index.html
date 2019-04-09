@@ -342,10 +342,7 @@
 
                                 </div>
                                 <div class="form-group float-left ml-4">
-                                    {% for error in contact_form.recaptcha.errors %}
-                                        {{ error }}
-                                    {% endfor %}
-                                    {{ contact_form.recaptcha }}
+                                    {{contact_form.recaptcha}}
 
                                 </div>
 
