@@ -16,6 +16,8 @@ app.config["MAIL_USERNAME"] = os.getenv('EMAIL_USER')
 app.config["MAIL_PASSWORD"] = os.getenv('EMAIL_PASS')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['RECAPTCHA_PUBLIC_KEY'] = os.getenv('RECAPTCHA_PUBLIC')
+app.config['RECAPTCHA_SECRET_KEY'] = os.getenv('RECAPTCHA_SECRET')
 
 db = SQLAlchemy(app)
 mail = Mail(app)

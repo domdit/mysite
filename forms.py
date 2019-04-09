@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, SubmitField, FileField, PasswordField, IntegerField
 from flask_wtf.file import FileAllowed
+from flask_wtf.recaptcha import RecaptchaField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from domdit.models import User
 
@@ -32,6 +33,7 @@ class Email(FlaskForm):
     name = StringField('Name', validators=[DataRequired(), Length(min=1, max=50)])
     email = StringField('Email', validators=[DataRequired(), Email()])
     message = TextAreaField('Message', validators=[DataRequired()])
+    recaptcha = RecaptchaField()
     submit = SubmitField('test')
 
 
