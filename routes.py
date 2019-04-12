@@ -16,13 +16,17 @@ def load_user(user_id):
 
 @app.template_filter('autoversion')
 def autoversion_filter(filename):
-    fullpath = os.path.join('domdit/static', filename[1:])
+    fullpath = '/domdit/' + filename[1:]
+    print(fullpath)
     try:
         timestamp = str(os.path.getmtime(fullpath))
+        print(timestamp)
     except OSError:
+        print('fuck')
         return filename
 
     newfile = "{0}?v={1}".format(filename, timestamp)
+    print(newfile)
     return newfile
 
 @app.route('/', methods=['GET', 'POST'])
