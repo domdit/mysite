@@ -17,7 +17,7 @@ def load_user(user_id):
 @app.template_filter('autoversion')
 def autoversion_filter(filename):
     path = 'domdit/' + filename[1:]
-    
+
     print(path)
     try:
         timestamp = str(os.path.getmtime(path))
