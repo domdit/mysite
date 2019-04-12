@@ -39,10 +39,10 @@ window.onload = function() {
 
             if (window.innerWidth < 600) {
                 $('.skill-item-container').removeClass('col-3');
-                $('.skill-item-container').addClass('col-6');
+                $('.skill-item-container').addClass('col');
             } else {
                 $('.skill-item-container').addClass('col-3');
-                $('.skill-item-container').removeClass('col-6');
+                $('.skill-item-container').removeClass('col');
             }
 
 
@@ -79,18 +79,22 @@ window.onload = function() {
                 $('#skill8').removeClass('my-none');
                 $('#skill8').addClass('animated bounceIn');
                 }, 950);
+            setTimeout(function(){
+                $('#skill9').removeClass('my-none');
+                $('#skill9').addClass('animated bounceIn');
+                }, 1050);
 
             if (window.innerWidth < 600) {
                 setTimeout(function(){
                     $('#about2').removeClass('my-none');
                     $('#about2').addClass('animated zoomInLeft');
-                    }, 1050);
+                    }, 1150);
 
             } else {
                 setTimeout(function(){
                     $('#about2').removeClass('my-none');
                     $('#about2').addClass('animated slideInRight');
-                    }, 1050);
+                    }, 1150);
 
             }
 

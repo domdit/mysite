@@ -123,7 +123,7 @@ h4 {
 .skill-item{
     background-color: var(--viola);
     color: var(--light-color);
-    font-size:1.3em;
+    font-size:1.0em;
     font-weight: bold;
     font-family: var(--main-font);
 
@@ -133,9 +133,9 @@ h4 {
     max-width:250px;
     min-width:200px
     width: fit-content;
-    padding: 6px;
-    padding-left:10px;
-    padding-right:10px;
+    padding: 5px;
+    padding-left:5px;
+    padding-right:5px;
 
 
 
