@@ -16,10 +16,11 @@ def load_user(user_id):
 
 @app.template_filter('autoversion')
 def autoversion_filter(filename):
-    fullpath = '/domdit/' + filename[1:]
-    print(fullpath)
+    path = 'domdit/' + filename[1:]
+    
+    print(path)
     try:
-        timestamp = str(os.path.getmtime(fullpath))
+        timestamp = str(os.path.getmtime(path))
         print(timestamp)
     except OSError:
         print('fuck')
