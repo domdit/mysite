@@ -204,7 +204,7 @@ def new_blog_post():
     return render_template('new_blog_post.html', form=form, items=items)
 
 @app.route("/blog")
-def post():
+def blog():
     posts = Blog.query.all()
     return render_template('post.html', posts=posts, title="Blog - Dominic DiTaranto")
 
