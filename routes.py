@@ -204,7 +204,7 @@ def new_blog_post():
 
     return render_template('new_blog_post.html', form=form, items=items, legend="New Blog Post")
 
-@app.route("/admin/post/<int:post_id>/update)>", methods=['GET', 'POST'])
+@app.route("/admin/post/<int:post_id>/update", methods=['GET', 'POST'])
 @login_required
 def update(post_id):
 
