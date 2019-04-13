@@ -15,7 +15,9 @@
     {% for post in posts %}
 
         <div class="blog-post border rounded">
-            <h1>{{post.name|safe}}</h1>
+            <a href="{{url_for('post', post_id=post.id)}}">
+                <h1>{{post.name|safe}}</h1>
+            </a>
             <small>{{post.date|safe}} by Dominic DiTaranto</small>
             <hr>
             {{post.text|safe}}
