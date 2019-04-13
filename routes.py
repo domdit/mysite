@@ -206,7 +206,7 @@ def new_blog_post():
 
 @app.route("/admin/post/<int:post_id>/update)>", methods=['GET', 'POST'])
 @login_required
-def new_blog_post(post_id):
+def update(post_id):
 
     form = NewBlogPost()
     post = Blog.query.get_or_404(post_id)
