@@ -15,10 +15,10 @@
     {% for post in posts %}
 
         <div class="blog-post border rounded">
-            <h1>{{post.name}}</h1>
-            <small>{{post.date}} by Dominic DiTaranto</small>
+            <h1>{{post.name|safe}}</h1>
+            <small>{{post.date|safe}} by Dominic DiTaranto</small>
             <hr>
-            {{post.text}}
+            {{post.text|safe}}
         </div>
 
     {% endfor %}
