@@ -213,11 +213,11 @@ def update(post_id):
 
 
     if form.validate_on_submit():
-        post.name = form.name.data
+        post.name = form.post_name.data
         post.text = form.content.data
         db.session.commit()
 
-    form.name.data = post.name
+    form.post_name.data = post.name
     form.content.data = post.text
 
     return render_template('new_blog_post.html', form=form, legend="Update Blog Post")
