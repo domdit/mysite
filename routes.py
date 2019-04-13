@@ -203,12 +203,12 @@ def new_blog_post():
 
     return render_template('new_blog_post.html', form=form, items=items)
 
-@app.route("/blog")
+@app.route("/blog", methods=['GET', 'POST'])
 def blog():
     posts = Blog.query.all()
     return render_template('post.html', posts=posts, title="Blog - Dominic DiTaranto")
 
-@app.route("/blog/post/<int:post_id>")
+@app.route("/blog/post/<int:post_id>", methods=['GET', 'POST'])
 def post(post_id):
     post = Blog.query.get_or_404(post_id)
     return render_template('post.html', post=post, title=post.name)
