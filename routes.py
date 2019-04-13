@@ -174,6 +174,7 @@ def testimonial():
     return render_template('testimonial.html', form=form, test_items=test_items)
 
 @app.route("/admin/new_blog_post", methods=['GET', 'POST'])
+@login_required
 def new_blog_post():
 
     form = NewBlogPost()
@@ -201,7 +202,26 @@ def new_blog_post():
 
     items = Blog.query.all()
 
-    return render_template('new_blog_post.html', form=form, items=items)
+    return render_template('new_blog_post.html', form=form, items=items, legend="New Blog Post")
+
+@app.route("/admin/post/<int:post_id>/update)>", methods=['GET', 'POST'])
+@login_required
+def new_blog_post(post_id):
+
+    form = NewBlogPost()
+    post = Blog.query.get_or_404(post_id)
+
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            post.name = form.name.data
+            post.text = form.content.data
+            db.session.commit()
+
+    form.name.data = post.name
+    form.content.data = post.text
+
+    return render_template('new_blog_post.html', form=form, legend="Update Blog Post")
+
 
 @app.route("/blog", methods=['GET', 'POST'])
 def blog():
