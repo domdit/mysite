@@ -211,11 +211,11 @@ def update(post_id):
     form = NewBlogPost()
     post = Blog.query.get_or_404(post_id)
 
-    if request.method == 'POST':
-        if form.validate_on_submit():
-            post.name = form.name.data
-            post.text = form.content.data
-            db.session.commit()
+
+    if form.validate_on_submit():
+        post.name = form.name.data
+        post.text = form.content.data
+        db.session.commit()
 
     form.name.data = post.name
     form.content.data = post.text
