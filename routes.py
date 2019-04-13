@@ -206,7 +206,7 @@ def new_blog_post():
 @app.route("/blog", methods=['GET', 'POST'])
 def blog():
     posts = Blog.query.all()
-    return render_template('post.html', posts=posts, title="Blog - Dominic DiTaranto")
+    return render_template('blog.html', posts=posts, title="Blog - Dominic DiTaranto")
 
 @app.route("/blog/post/<int:post_id>", methods=['GET', 'POST'])
 def post(post_id):
