@@ -20,7 +20,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
-storage = SQLAStorage(db=db)
 mail = Mail(app)
 bcrypt = Bcrypt(app)
 

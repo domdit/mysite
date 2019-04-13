@@ -188,9 +188,7 @@ def new_blog_post():
         if form.validate_on_submit():
             blog_post = Blog(name=form.post_name.data,
                              date=date,
-                             content=form.content.data,
-                             url=form.url.data,
-                             folder=form.folder.data
+                             text=form.content.data
                              )
 
             folder = "post_" + str(blog_post.id)
