@@ -54,22 +54,4 @@
     </form>
 </div>
 
-<hr>
-
-{% for item in items %}
-
-{% if item %}
-
-<div class="mb-4 border">
-<h1>{{item.name}}</h1>
-<h3>{{item.date}}</h3>
-<p>{{item.text | safe}}</p>
-</div>
-
-
-{% endif %}
-
-{% endfor %}
-
-
 {% endblock %}
