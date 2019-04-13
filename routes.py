@@ -203,6 +203,17 @@ def new_blog_post():
 
     return render_template('new_blog_post.html', form=form, items=items)
 
+@app.route("/blog")
+def post():
+    posts = Blog.query.all()
+    return render_template('post.html', posts=posts, title="Blog - Dominic DiTaranto")
+
+@app.route("/blog/post/<int:post_id>")
+def post(post_id):
+    post = Blog.query.get_or_404(post_id)
+    return render_template('post.html', post=post, title=post.name)
+
+
 
 @app.route("/item/<int:item_id>/<table>/<location>/delete", methods=['GET', 'POST'])
 def delete_item(item_id, table, location):

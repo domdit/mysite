@@ -1,0 +1,28 @@
+{% set active_page = "blog-page" %}
+
+{% extends "layout.html" %}
+
+{% block script %}
+
+{% endblock %}
+
+{% block main %}
+
+{% include 'navbar.html' %}
+
+<div id="blog" class="container" style="padding-top: 100px;">
+
+    {% for post in posts %}
+
+        <div class="blog-post border rounded">
+            <h1>{{post.name}}</h1>
+            <small>{{post.date}} by Dominic DiTaranto</small>
+            <hr>
+            {{post.text}}
+        </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

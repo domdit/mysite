@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800|Raleway:400,500');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono');
 
 :root{
 
@@ -11,6 +12,7 @@
 
     --header-font: 'Montserrat', sans-serif;
     --main-font: 'Raleway', sans-serif;
+    --blog-font: 'Ubuntu Mono', monospace;
 
 }
 
@@ -131,14 +133,9 @@ h4 {
     margin-left: auto;
 
     max-width:250px;
-    min-width:200px
+    min-width:200px;
     width: fit-content;
     padding: 5px;
-    padding-left:5px;
-    padding-right:5px;
-
-
-
 
 }
 
@@ -523,7 +520,62 @@ a > .btn:hover, .btn-custom:hover {
 
 }
 
+.blog {
+    background-color: var(--greyish);
+}
 
+.blog-post{
+    margin-bottom: 20px;
+    margin-right: 10%;
+    margin-left: 10%;
+    background-color: var(--light-color);
+    padding: 30px;
+
+}
+
+.blog-post h1{
+    color: var(--primary-color);
+    font-weight: normal;
+    text-transform: none;
+}
+
+.blog-post h2,
+.blog-post h3,
+.blog-post h4,
+.blog-post h5 {
+    color: var(--primary-color);
+    font-weight: normal;
+    text-transform: none;
+}
+
+.blog-post h2{
+    font-size: 1.6em;
+    margin-bottom: 3px;
+
+}
+
+.blog-post h3{
+    color: var(--viola);
+    font-size: 1.4em;
+    font-weight: bold;
+
+}
+
+.blog-post h4{
+    font-weight: bold;
+    letter-spacing: 0.3em;
+
+}
+
+.blog-post p{
+    font-family: var(--blog-font);
+}
+
+.blog-post img{
+    max-width: 90%;
+    height: auto;
+
+}
 
 .navbar-custom .nav-item.active .nav-link,
 .navbar-custom .nav-item:hover .nav-link {
