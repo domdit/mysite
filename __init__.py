@@ -4,6 +4,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_recaptcha import ReCaptcha
+from flask_blogging import SQLAStorage, BloggingEngine
+
 
 import os
 
@@ -18,10 +20,11 @@ app.config["MAIL_PASSWORD"] = os.getenv('EMAIL_PASS')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-
 db = SQLAlchemy(app)
+storage = SQLAStorage(db=db)
 mail = Mail(app)
 bcrypt = Bcrypt(app)
+
 
 recaptcha = ReCaptcha()
 recaptcha.is_enabled = True
@@ -33,13 +36,9 @@ recaptcha.size = 'normal'
 recaptcha.tabindex = 0
 recaptcha.init_app(app)
 
-
-
-
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_message_category = 'info'
-
 
 from domdit import routes
 

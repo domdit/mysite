@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+
+{% set active_page = "blog" %}
+
+{% include "admin_template.html" %}
+
+{% block main %}
+
+<div class="container">
+    <form action="" method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">New Blog Post</legend>
+
+
+
+                    <div class="form-group">
+                        {{ form.post_name.label(class="form-control-label") }}
+                        {{ form.post_name(class="form-control form-control-md") }}
+                        {% if form.post_name.errors %}
+                            {% for error in form.post_name.errors %}
+                                <span class="text-danger">{{ error }}</span></br>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+
+
+                    <div class="form-group">
+                        {{ form.content.label(class="form-control-label") }}
+                        {{ form.content(class="form-control form-control-md") }}
+                        {% if form.content.errors %}
+                            {% for error in form.content.errors %}
+                                <span class="text-danger">{{ error }}</span></br>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.thumb.label() }}
+                        {{ form.thumb(class="form-control-file") }}
+                        {% if form.thumb.errors %}
+                            {% for error in form.thumb.errors %}
+                                <span class="text-danger">{{ error }}</span></br>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+
+
+
+        </fieldset>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-secondary") }}
+        </div>
+    </form>
+</div>
+
+<hr>
+
+{% for item in items %}
+
+{% if item %}
+
+<h1>{{item.name}}</h1>
+<h3>{{item.date}}</h3>
+<p>{{item.content}}</p>
+
+{% endif %}
+
+{% endfor %}
+
+
+{% endblock %}

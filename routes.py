@@ -2,8 +2,8 @@ from flask import render_template, request, flash, redirect, url_for, current_ap
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
 from domdit import app, mail, db, bcrypt, login_manager, recaptcha
-from domdit.forms import Email, PortfolioForm, AdminForm, Login, TestimonialForm
-from domdit.models import Portfolio, User, Testimonial
+from domdit.forms import Email, PortfolioForm, AdminForm, Login, TestimonialForm, NewBlogPost
+from domdit.models import Portfolio, User, Testimonial, Blog
 from domdit.utils import portfolio_img_uploader
 import shutil
 import os
@@ -18,12 +18,9 @@ def load_user(user_id):
 def autoversion_filter(filename):
     path = 'domdit/' + filename[1:]
 
-    print(path)
     try:
         timestamp = str(os.path.getmtime(path))
-        print(timestamp)
     except OSError:
-        print('fuck')
         return filename
 
     newfile = "{0}?v={1}".format(filename, timestamp)
@@ -124,16 +121,16 @@ def portfolio():
                                        )
 
             if form.thumb.data:
-                portfolio_img_uploader(form.thumb.data, 'thumbnail', form.folder.data, False)
+                portfolio_img_uploader(form.thumb.data, 'thumbnail', form.folder.data, 'port')
 
             if form.img1.data:
-                portfolio_img_uploader(form.img1.data, 'img1', form.folder.data, False)
+                portfolio_img_uploader(form.img1.data, 'img1', form.folder.data, 'port')
 
             if form.img2.data:
-                portfolio_img_uploader(form.img2.data, 'img2', form.folder.data, False)
+                portfolio_img_uploader(form.img2.data, 'img2', form.folder.data, 'port')
 
             if form.img3.data:
-                portfolio_img_uploader(form.img3.data, 'img3', form.folder.data, False)
+                portfolio_img_uploader(form.img3.data, 'img3', form.folder.data, 'port')
 
             db.session.add(portfolio_item)
             db.session.commit()
@@ -165,7 +162,7 @@ def testimonial():
                                        )
 
             if form.img.data:
-                portfolio_img_uploader(form.img.data, 'img', form.folder.data, True)
+                portfolio_img_uploader(form.img.data, 'img', form.folder.data, 'test')
 
             db.session.add(testimonial_item)
             db.session.commit()
@@ -175,6 +172,38 @@ def testimonial():
 
 
     return render_template('testimonial.html', form=form, test_items=test_items)
+
+@app.route("/admin/new_blog_post", methods=['GET', 'POST'])
+def new_blog_post():
+
+    form = NewBlogPost()
+
+    if request.method == 'POST':
+
+        x = datetime.now()
+        date = x.strftime("%x %I:%M")
+
+        print(form.errors)
+
+        if form.validate_on_submit():
+            blog_post = Blog(name=form.post_name.data,
+                             date=date,
+                             content=form.content.data,
+                             url=form.url.data,
+                             folder=form.folder.data
+                             )
+
+            folder = "post_" + str(blog_post.id)
+
+            if form.thumb.data:
+                portfolio_img_uploader(form.thumb.data, 'thumb', folder , 'blog')
+
+            db.session.add(blog_post)
+            db.session.commit()
+
+    items = Blog.query.all()
+
+    return render_template('new_blog_post.html', form=form, items=items)
 
 
 @app.route("/item/<int:item_id>/<table>/<location>/delete", methods=['GET', 'POST'])

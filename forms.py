@@ -63,5 +63,9 @@ class TestimonialForm(FlaskForm):
     submit = SubmitField('Submit')
 
 
-
+class NewBlogPost(FlaskForm):
+    post_name = StringField('Name:', validators=[DataRequired()])
+    content = TextAreaField('Blog Content:')
+    thumb = FileField('Thumbnail:', validators=[FileAllowed(['jpg', 'png', 'gif'])])
+    submit = SubmitField('Submit')
 

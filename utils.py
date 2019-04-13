@@ -2,7 +2,7 @@ from flask import current_app, flash
 import os
 from PIL import Image
 
-def portfolio_img_uploader(data, name, folder, testimonial):
+def portfolio_img_uploader(data, name, folder, type):
 
     _, f_ext = os.path.splitext(data.filename)
 
@@ -13,10 +13,12 @@ def portfolio_img_uploader(data, name, folder, testimonial):
 
     picture_fn = name + f_ext
 
-    if testimonial == True:
+    if type == 'test':
         folder = os.path.join(current_app.root_path, 'static/img/testimonial', folder)
-    elif testimonial == False:
+    elif type == 'port':
         folder = os.path.join(current_app.root_path, 'static/img/portfolio', folder)
+    elif type == 'blog':
+        folder = os.path.join(current_app.root_path, 'static/img/blog', folder)
 
     try:
         os.mkdir(folder)

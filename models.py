@@ -2,6 +2,7 @@ from domdit import db, app
 from flask_login import UserMixin
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 
+db.metadata.clear()
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -46,6 +47,11 @@ class Testimonial(db.Model):
     folder = db.Column(db.String(200), unique=True, nullable=False)
 
 
+class Blog(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(200), unique=False, nullable=False)
+    date = db.Column(db.String(200), unique=False, nullable=False)
+    text = db.Column(db.Text)
 
 
 
