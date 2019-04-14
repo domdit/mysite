@@ -54,5 +54,12 @@ class Blog(db.Model):
     text = db.Column(db.Text)
 
 
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    post_id = db.Column(db.Integer)
+    name = db.Column(db.String(200), nullable=False)
+    email = db.Column(db.String(120))
+    date = db.Column(db.String(200), nullable=False)
+    text = db.Column(db.Text)
 
 

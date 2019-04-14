@@ -69,3 +69,9 @@ class NewBlogPost(FlaskForm):
     thumb = FileField('Thumbnail:', validators=[FileAllowed(['jpg', 'png', 'gif'])])
     submit = SubmitField('Submit')
 
+
+class CommentForm(FlaskForm):
+    name = StringField('Name:', validators=[DataRequired()])
+    text = TextAreaField('Blog Content:')
+    email = StringField('Email')
+    submit = SubmitField('Submit')

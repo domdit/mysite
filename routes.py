@@ -2,8 +2,8 @@ from flask import render_template, request, flash, redirect, url_for, current_ap
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
 from domdit import app, mail, db, bcrypt, login_manager, recaptcha
-from domdit.forms import Email, PortfolioForm, AdminForm, Login, TestimonialForm, NewBlogPost
-from domdit.models import Portfolio, User, Testimonial, Blog
+from domdit.forms import Email, PortfolioForm, AdminForm, Login, TestimonialForm, NewBlogPost, CommentForm
+from domdit.models import Portfolio, User, Testimonial, Blog, Comment
 from domdit.utils import portfolio_img_uploader
 import shutil
 import os
@@ -200,27 +200,30 @@ def new_blog_post():
             db.session.add(blog_post)
             db.session.commit()
 
-    items = Blog.query.all()
+            return redirect(url_for('post', post_id=blog_post.id))
 
-    return render_template('new_blog_post.html', form=form, items=items, legend="New Blog Post")
+    return render_template('new_blog_post.html', form=form, legend="New Blog Post")
 
 @app.route("/admin/post/<int:post_id>/update", methods=['GET', 'POST'])
-@login_required
 def update(post_id):
+
+    if not current_user.is_authenticated:
+        redirect(url_for('login'))
 
     form = NewBlogPost()
     post = Blog.query.get_or_404(post_id)
-
 
     if form.validate_on_submit():
         post.name = form.post_name.data
         post.text = form.content.data
         db.session.commit()
+        return redirect(url_for('post', post_id=post_id))
 
     form.post_name.data = post.name
     form.content.data = post.text
 
     return render_template('new_blog_post.html', form=form, legend="Update Blog Post")
+
 
 
 @app.route("/blog", methods=['GET', 'POST'])
@@ -231,7 +234,39 @@ def blog():
 @app.route("/blog/post/<int:post_id>", methods=['GET', 'POST'])
 def post(post_id):
     post = Blog.query.get_or_404(post_id)
-    return render_template('post.html', post=post, title=post.name)
+
+    form = CommentForm()
+
+    x = datetime.now()
+    date = x.strftime("%x %I:%M")
+
+    if form.validate_on_submit():
+        comment = Comment(name=form.name.data,
+                          date=date,
+                          email=form.email.data,
+                          text=form.text.data,
+                          post_id=post_id
+                          )
+        db.session.add(comment)
+        db.session.commit()
+
+        msg = Message("New comment from domdit.com!", sender='customer@domdit.com', recipients=['me@domdit.com'])
+        msg.body = '''
+                            From: %s <%s>
+                            %s
+                            %s
+                            ''' % (form.name.data, form.email.data, form.text.data, url_for('post', post_id=post_id, _external=True))
+        mail.send(msg)
+
+        flash("Thank you for the comment! Check back for a reply!")
+
+        comments = Comment.query.filter(Comment.post_id == post_id).all()
+
+        return render_template('post.html', post=post, title=post.name, form=form, comments=comments)
+
+    comments = Comment.query.filter(Comment.post_id == post_id).all()
+
+    return render_template('post.html', post=post, title=post.name, form=form, comments=comments)
 
 
 
@@ -242,12 +277,16 @@ def delete_item(item_id, table, location):
         item = Portfolio.query.get_or_404(item_id)
         path = os.path.join(current_app.root_path, 'static/img/portfolio', item.folder)
         shutil.rmtree(path)
+        msg = "You Portfolio Item has been successfully deleted!"
+    elif table == 'Blog':
+        item = Blog.query.get_or_404(item_id)
+        msg = "Your blog post has been successfully deleted!"
     else:
         flash('Delete failed, try again', 'danger')
         return redirect(url_for(location))
 
     db.session.delete(item)
     db.session.commit()
-    flash('Your menu item has been deleted!', 'success')
+    flash(msg, 'success')
     return redirect(url_for(location))
 

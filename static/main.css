@@ -129,11 +129,11 @@ h4 {
     font-weight: bold;
     font-family: var(--main-font);
 
-    margin-right: auto;
+    margin-right: 5px;
     margin-left: auto;
 
-    max-width:250px;
-    min-width:200px;
+    max-width:150px;
+    min-width:150px;
     width: fit-content;
     padding: 5px;
 
@@ -521,7 +521,9 @@ a > .btn:hover, .btn-custom:hover {
 }
 
 .blog {
-    background-color: var(--greyish);
+background-color: var(--primary-color);
+background-image: url("https://www.transparenttextures.com/patterns/old-map.png");
+/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
 
 .blog-post{
@@ -537,6 +539,14 @@ a > .btn:hover, .btn-custom:hover {
     color: var(--primary-color);
     font-weight: normal;
     text-transform: none;
+}
+
+.blog-post a h1:hover,
+.blog-post a:hover{
+    color: var(--accent-color);
+    text-transform: none;
+    text-decoration: none;
+
 }
 
 .blog-post h2,
