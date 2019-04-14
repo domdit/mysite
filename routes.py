@@ -260,13 +260,15 @@ def post(post_id):
 
         flash("Thank you for the comment! Check back for a reply!")
 
-        comments = Comment.query.filter(Comment.post_id == post_id).all()
-
-        return render_template('post.html', post=post, title=post.name, form=form, comments=comments)
+        return redirect(url_for('post', post_id=post_id))
 
     comments = Comment.query.filter(Comment.post_id == post_id).all()
 
-    return render_template('post.html', post=post, title=post.name, form=form, comments=comments)
+    count = 0
+    for i in comments:
+        count += 1
+
+    return render_template('post.html', post=post, title=post.name, form=form, comments=comments, count=count)
 
 
 

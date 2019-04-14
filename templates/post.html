@@ -65,7 +65,7 @@
         <hr>
 
 
-        <h3 class="underline">Comments:</h3>
+        <h3 class="underline">Comments({{count}}):</h3>
 
         {% if comments %}
 
@@ -88,6 +88,13 @@
             </div>
 
             {% endfor %}
+        {% else %}
+        <center>
+            <p>Be the first to leave a comment!</p>
+
+        </center>
+
+
 
         {% endif %}
 
