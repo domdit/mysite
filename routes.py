@@ -281,6 +281,8 @@ def post(post_id):
                                     %s
                                     %s
                                     ''' % (form.name.data, form.email.data, form.text.data, url_for('post', post_id=post_id, _external=True))
+                print(msg.body)
+
                 mail.send(msg)
 
                 flash("Thank you for the comment! Check back for a reply!")
