@@ -263,28 +263,28 @@ def post(post_id):
     x = datetime.now()
     date = x.strftime("%x %I:%M")
 
-    if form.validate_on_submit():
-        if request.form['comment_submit'] == 'submit':
-            comment = Comment(name=form.name.data,
-                              date=date,
-                              email=form.email.data,
-                              text=form.text.data,
-                              post_id=post_id
-                              )
-            db.session.add(comment)
-            db.session.commit()
+    if form.comment_submit.data and form.validate():
 
-            msg = Message("New comment from domdit.com!", sender='customer@domdit.com', recipients=['me@domdit.com'])
-            msg.body = '''
-                                From: %s <%s>
-                                %s
-                                %s
-                                ''' % (form.name.data, form.email.data, form.text.data, url_for('post', post_id=post_id, _external=True))
-            mail.send(msg)
+        comment = Comment(name=form.name.data,
+                          date=date,
+                          email=form.email.data,
+                          text=form.text.data,
+                          post_id=post_id
+                          )
+        db.session.add(comment)
+        db.session.commit()
 
-            flash("Thank you for the comment! Check back for a reply!")
+        msg = Message("New comment from domdit.com!", sender='customer@domdit.com', recipients=['me@domdit.com'])
+        msg.body = '''
+                            From: %s <%s>
+                            %s
+                            %s
+                            ''' % (form.name.data, form.email.data, form.text.data, url_for('post', post_id=post_id, _external=True))
+        mail.send(msg)
 
-            return redirect(url_for('post', post_id=post_id))
+        flash("Thank you for the comment! Check back for a reply!")
+
+        return redirect(url_for('post', post_id=post_id))
 
     comments = Comment.query.filter(Comment.post_id == post_id).order_by(Comment.date.desc()).all()
 
@@ -297,7 +297,7 @@ def post(post_id):
     categories = Blog.query.group_by(Blog.category).limit(5).all()
     tags = Tag.query.group_by(Tag.name).limit(25).all()
     search_form = Search()
-    if search_form.validate_on_submit():
+    if search_form.search_submit.data and search_form.validate():
         return redirect(url_for('query', term=search_form.term.data))
 
     return render_template('post.html', post=post, prev_post=prev_post, next_post=next_post,

@@ -109,8 +109,8 @@ class CommentForm(FlaskForm):
     text = TextAreaField('Comment:')
     email = StringField('Email')
     recaptcha = RecaptchaField(validators=[DataRequired()])
-    submit = SubmitField('Submit')
+    comment_submit = SubmitField('Submit')
 
 class Search(FlaskForm):
     term = StringField('Name:', validators=[DataRequired()])
-    submit = SubmitField('Submit')
+    search_submit = SubmitField('Submit')
