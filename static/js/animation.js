@@ -4,50 +4,73 @@ $(document).ready(function() {
         var scroll = $(this).scrollTop();
         var dist = 1.3;
 
+        //offsets
+        var homeOff = $('.header').offset().top;
+        var aboutOff = $('#about').offset().top;
+        var portOff = $('#port').offset().top;
+        var testOff = $('.testimonial-container').offset().top;
         var contactOff = $('#contact').offset().top;
 
-        var aboutOff = $('#about').offset().top;
+        //animated classes
+        //about section
+        var skillItemContainer = $('.skill-item-container');
+        var skillItemHeader = $('#skill-head');
         var aboutText = $('.about-text');
+        var aboutText2 = $('#about2');
 
-        var portOff = $('#port').offset().top;
+        //portfolio section
+        var portfolioHeader = $('#work-head');
+        var portfolioItem1 = $('#port-1');
+        var portfolioItem2 = $('#port-2');
+        var portfolioItem3 = $('#port-3');
 
-        var testOff = $('.testimonial-container').offset().top;
+        //testimonial section
         var test = $('.testimonial');
+        var testHeader = $('#test-head');
 
-        var homeOff= $('.header').offset().top;
+        //navlinks
+        var homeLink = $('#home-link');
+        var aboutLink = $('#about-link');
+        var portLink = $('#port-link');
+        var testLink = $('#test-link');
+        var contactLink = $('#cont-link');
+
+
+
 
         if (scroll >= (homeOff / dist)) {
-            $('#home-link').addClass('active');
-            $('#port-link').addClass('active');
-            $('#about-link').removeClass('active');
-            $('#test-link').removeClass('active');
+            homeLink.addClass('active');
+            aboutLink.removeClass('active');
+            portLink.addClass('active');
+            testLink.removeClass('active');
 
         } else {
-            $('#home-link').removeClass('active');
-
-
+            homeLink.removeClass('active');
         }
 
 
         if (scroll >= (aboutOff / (dist + .2))) {
+            homeLink.removeClass('active');
+            aboutLink.addClass('active');
+
             aboutText.removeClass('my-none');
             aboutText.addClass('animated slideInLeft');
 
-            $('#about-link').addClass('active');
-            $('#home-link').removeClass('active');
+
 
             if (window.innerWidth < 600) {
-                $('.skill-item-container').removeClass('col-3');
-                $('.skill-item-container').addClass('col');
+                skillItemContainer.removeClass('col-3');
+                skillItemContainer.addClass('col');
             } else {
-                $('.skill-item-container').addClass('col-3');
-                $('.skill-item-container').removeClass('col');
+                skillItemContainer.addClass('col-3');
+                skillItemContainer.removeClass('col');
             }
 
 
             setTimeout(function(){
+                skillItemHeader.removeClass('my-none');
+                //leave these as actual id names, no need to create variables for each one
                 $('#skill1').removeClass('my-none');
-                $('#skill-head').removeClass('my-none');
                 $('#skill1').addClass('animated bounceIn');
                 }, 250);
             setTimeout(function(){
@@ -85,71 +108,67 @@ $(document).ready(function() {
 
             if (window.innerWidth < 600) {
                 setTimeout(function(){
-                    $('#about2').removeClass('my-none');
-                    $('#about2').addClass('animated zoomInLeft');
+                    aboutText2.removeClass('my-none');
+                    aboutText2.addClass('animated zoomInLeft');
                     }, 1150);
 
             } else {
                 setTimeout(function(){
-                    $('#about2').removeClass('my-none');
-                    $('#about2').addClass('animated slideInRight');
+                    aboutText2.removeClass('my-none');
+                    aboutText2.addClass('animated slideInRight');
                     }, 1150);
-
             }
 
-
         } else {
-            $('#cont-link').removeClass('active')
+            contactLink.removeClass('active')
 
         }
 
         if (scroll >= (portOff / (dist + 0.2 ))) {
-            $('#work-head').removeClass('my-none');
-            $('#port-1').removeClass('my-none');
-            $('#port-1').addClass('animated flipInY');
+            portfolioHeader.removeClass('my-none');
+            portfolioItem1.removeClass('my-none');
+            portfolioItem1.addClass('animated flipInY');
 
-            $('#port-link').addClass('active');
-            $('#about-link').removeClass('active');
-            $('#test-link').removeClass('active');
-
-
+            portLink.addClass('active');
+            aboutLink.removeClass('active');
+            testLink.removeClass('active');
 
             setTimeout(function(){
-                $('#port-2').removeClass('my-none');
-                $('#port-2').addClass('animated flipInY');
+                portfolioItem2.removeClass('my-none');
+                portfolioItem2.addClass('animated flipInY');
                 }, 250);
 
 
             setTimeout(function(){
-                $('#port-3').removeClass('my-none');
-                $('#port-3').addClass('animated flipInY');
+                portfolioItem3.removeClass('my-none');
+                portfolioItem3.addClass('animated flipInY');
                 }, 500);
 
         } else {
-            $('#port-link').removeClass('active');
+            portLink.removeClass('active');
 
         }
 
         if (scroll >=(testOff / dist)) {
             test.removeClass('my-none');
-            $('#test-head').removeClass('my-none');
+            testHeader.removeClass('my-none');
             test.addClass('animated flipInX');
-            $('#test-link').addClass('active');
-            $('#port-link').removeClass('active');
-            $('#about-link').removeClass('active');
+            testLink.addClass('active');
+            portLink.removeClass('active');
+            aboutLink.removeClass('active');
 
         } else {
-            $('#test-link').removeClass('active')
+            testLink.removeClass('active')
 
         }
 
         if (scroll >= (contactOff / dist)) {
-            $('#cont-link').addClass('active');
-            $('#port-link').removeClass('active');
-            $('#about-link').removeClass('active');
-            $('#test-link').removeClass('active');
+            contactLink.addClass('active');
+            portLink.removeClass('active');
+            aboutLink.removeClass('active');
+            testLink.removeClass('active');
         } else {
-            $('#cont-link').removeClass('active')
+            contactLink.removeClass('active')
 
 
         }
