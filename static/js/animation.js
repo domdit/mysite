@@ -1,11 +1,10 @@
-window.onload = function() {
+$(document).ready(function() {
     $(window).scroll(function () {
 
         var scroll = $(this).scrollTop();
         var dist = 1.3;
 
         var contactOff = $('#contact').offset().top;
-        var contact = $('.contact_form');
 
         var aboutOff = $('#about').offset().top;
         var aboutText = $('.about-text');
@@ -156,4 +155,4 @@ window.onload = function() {
         }
 
     });
-};
+});
