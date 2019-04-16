@@ -104,7 +104,6 @@ def new_admin():
 def portfolio():
 
     form = PortfolioForm()
-    print(form.errors)
 
     if request.method == 'POST':
 
