@@ -2,8 +2,8 @@ from flask import render_template, request, flash, redirect, url_for, current_ap
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
 from domdit import app, mail, db, bcrypt, login_manager, recaptcha
-from domdit.forms import Email, PortfolioForm, AdminForm, Login, TestimonialForm, NewBlogPost, CommentForm
-from domdit.models import Portfolio, User, Testimonial, Blog, Comment
+from domdit.forms import Email, PortfolioForm, AdminForm, Login, TestimonialForm, NewBlogPost, CommentForm, Search
+from domdit.models import Portfolio, User, Testimonial, Blog, Tag, Comment
 from domdit.utils import portfolio_img_uploader
 import shutil
 import os
@@ -154,12 +154,12 @@ def testimonial():
 
         if form.validate_on_submit():
             testimonial_item = Testimonial(name=form.name.data,
-                                       site_name=form.site_name.data,
-                                       portfolio_id=form.portfolio_id.data,
-                                       text=form.text.data,
-                                       url=form.url.data,
-                                       folder=form.folder.data
-                                       )
+                                           site_name=form.site_name.data,
+                                           portfolio_id=form.portfolio_id.data,
+                                           text=form.text.data,
+                                           url=form.url.data,
+                                           folder=form.folder.data
+                                           )
 
             if form.img.data:
                 portfolio_img_uploader(form.img.data, 'img', form.folder.data, 'test')
@@ -189,18 +189,15 @@ def new_blog_post():
         if form.validate_on_submit():
             blog_post = Blog(name=form.post_name.data,
                              date=date,
-                             text=form.content.data
+                             text=form.content.data,
+                             tags=form.tags.data,
+                             category=form.category.data
                              )
-
-            folder = "post_" + str(blog_post.id)
-
-            if form.thumb.data:
-                portfolio_img_uploader(form.thumb.data, 'thumb', folder , 'blog')
 
             db.session.add(blog_post)
             db.session.commit()
 
-            return redirect(url_for('post', post_id=blog_post.id))
+            return redirect(url_for('post', post_id=blog_post.blog_id))
 
     return render_template('new_blog_post.html', form=form, legend="New Blog Post")
 
@@ -228,12 +225,38 @@ def update(post_id):
 
 @app.route("/blog", methods=['GET', 'POST'])
 def blog():
-    posts = Blog.query.all()
-    return render_template('blog.html', posts=posts, title="Blog - Dominic DiTaranto")
+
+    page = request.args.get('page', 1, type=int)
+    posts = Blog.query.order_by(Blog.date.desc()).paginate(page=page, per_page=5)
+
+    # for the sidebar
+    recent_posts = Blog.query.order_by(Blog.date.desc()).limit(3).all()
+    categories = Blog.query.group_by(Blog.category).limit(5).all()
+    tags = Tag.query.group_by(Tag.name).limit(25).all()
+    search_form = Search()
+    if search_form.validate_on_submit():
+        return redirect(url_for('query', term=search_form.term.data))
+
+
+
+    return render_template('blog.html', posts=posts, title="Blog - Dominic DiTaranto", search_form=search_form,
+                           recent_posts=recent_posts, categories=categories, tags=tags)
 
 @app.route("/blog/post/<int:post_id>", methods=['GET', 'POST'])
 def post(post_id):
     post = Blog.query.get_or_404(post_id)
+
+    prev = post_id - 1
+    next = post_id + 1
+
+    prev_post = False
+    next_post = False
+
+    if Blog.query.get(prev):
+        prev_post = Blog.query.get_or_404(prev)
+
+    if Blog.query.get(next):
+        next_post = Blog.query.get_or_404(next)
 
     form = CommentForm()
 
@@ -262,14 +285,67 @@ def post(post_id):
 
         return redirect(url_for('post', post_id=post_id))
 
-    comments = Comment.query.filter(Comment.post_id == post_id).all()
+    comments = Comment.query.filter(Comment.post_id == post_id).order_by(Comment.date.desc()).all()
 
     count = 0
     for i in comments:
         count += 1
 
-    return render_template('post.html', post=post, title=post.name, form=form, comments=comments, count=count)
+    # for the sidebar
+    recent_posts = Blog.query.order_by(Blog.date.desc()).limit(3).all()
+    categories = Blog.query.group_by(Blog.category).limit(5).all()
+    tags = Tag.query.group_by(Tag.name).limit(25).all()
+    search_form = Search()
+    if search_form.validate_on_submit():
+        return redirect(url_for('query', term=search_form.term.data))
 
+    return render_template('post.html', post=post, prev_post=prev_post, next_post=next_post,
+                           title=post.name, search_form=search_form, form=form, comments=comments, count=count,
+                           recent_posts=recent_posts, categories=categories, tags=tags)
+
+
+@app.route('/blog/query/<term>', methods=['GET', 'POST'])
+def query(term):
+
+    tag_query = Tag.query.filter_by(name=term).all()
+    text_query = Blog.query.filter((Blog.text.contains(term)) | (Blog.name.contains(term)) | Blog.category.contains(term)).all()
+
+    id_list = []
+    tag_posts = []
+
+
+    if tag_query:
+        got_tags = tag_query[0].post_tags.all()
+        for tags in got_tags:
+            if tags.blog_id in id_list:
+                pass
+            else:
+                id_list.append(tags.blog_id)
+
+    if text_query:
+        for post in text_query:
+            if post.blog_id in id_list:
+                pass
+            else:
+                id_list.append(post.blog_id)
+
+    id_list.sort(reverse=True)
+
+
+    for id in id_list:
+        tag_posts.append(Blog.query.filter_by(blog_id=id).all())
+
+    # for the sidebar
+    recent_posts = Blog.query.order_by(Blog.date.desc()).limit(3).all()
+    categories = Blog.query.group_by(Blog.category).limit(5).all()
+    tags = Tag.query.group_by(Tag.name).limit(25).all()
+    search_form = Search()
+    if search_form.validate_on_submit():
+        return redirect(url_for('query', term=search_form.term.data))
+
+
+    return render_template('query.html', tag_posts=tag_posts, search_form=search_form,
+                           recent_posts=recent_posts, categories=categories, tags=tags)
 
 
 @app.route("/item/<int:item_id>/<table>/<location>/delete", methods=['GET', 'POST'])
@@ -283,6 +359,13 @@ def delete_item(item_id, table, location):
     elif table == 'Blog':
         item = Blog.query.get_or_404(item_id)
         msg = "Your blog post has been successfully deleted!"
+    elif table == 'Comment':
+        item = Comment.query.get_or_404(item_id)
+        msg = "The comment has been deleted successfully"
+        db.session.delete(item)
+        db.session.commit()
+        flash(msg)
+        return redirect(url_for('post', post_id=location))
     else:
         flash('Delete failed, try again', 'danger')
         return redirect(url_for(location))

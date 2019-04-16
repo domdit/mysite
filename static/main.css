@@ -528,21 +528,29 @@ background-image: url("https://www.transparenttextures.com/patterns/old-map.png"
 
 .blog-post{
     margin-bottom: 20px;
-    margin-right: 10%;
-    margin-left: 10%;
+    color:black;
+    font-family: var(--blog-font);
+    min-width:300px;
     background-color: var(--light-color);
     padding: 30px;
 
 }
 
-.blog-post h1{
+.blog-post a{
+    color: var(--viola);
+
+}
+
+.blog-post h1,
+.blog-post h2{
     color: var(--primary-color);
     font-weight: normal;
     text-transform: none;
 }
 
 .blog-post a h1:hover,
-.blog-post a:hover{
+.blog-post a:hover,
+.blog-post a h2:hover{
     color: var(--accent-color);
     text-transform: none;
     text-decoration: none;
@@ -577,6 +585,11 @@ background-image: url("https://www.transparenttextures.com/patterns/old-map.png"
 
 }
 
+.recent_posts:hover{
+    color: var(--accent-color);
+
+}
+
 .blog-post p{
     font-family: var(--blog-font);
 }
@@ -586,6 +599,54 @@ background-image: url("https://www.transparenttextures.com/patterns/old-map.png"
     height: auto;
 
 }
+
+.excerpt {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-height: 21px;
+    max-height: 150px;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+}
+
+a.comment{
+    color: var(--primary-color);
+
+}
+
+a.comment:hover{
+    color: var(--accent-color);
+
+}
+
+#paginate{
+    margin-top:-10px;
+    margin-bottom:30px;
+    font-family: var(--blog-font);
+    font-weight: bold;
+}
+
+#paginate a.btn-custom {
+    background-color: var(--light-color);
+    border: 0;
+
+}
+
+#paginate a.btn-custom:hover {
+    background-color: var(--accent-color);
+}
+
+#paginate a.active{
+    background-color: var(--accent-color);
+
+}
+
+hr.posts {
+    margin:3px;
+    width: 50%;
+}
+
 
 .navbar-custom .nav-item.active .nav-link,
 .navbar-custom .nav-item:hover .nav-link {

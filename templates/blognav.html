@@ -1,0 +1,53 @@
+<script>
+
+    var d = false;
+
+    function tick(){
+        console.log('im here');
+        var b = $('#blognavbar');
+        console.log(d);
+
+        if (d === false) {
+            b.removeClass('d-none');
+            b.addClass('animated slideInLeft');
+            d = true;
+        } else {
+            b.addClass('d-none');
+            d = false;
+
+        }
+
+
+
+
+
+    }
+
+
+</script>
+
+
+<div id="blognavbar" class="blognavbar d-none float-left">
+
+    <div style="position:relative;" class="mt-5">
+        <h2 style="color:black;">DOMDIT.COM</h2>
+
+
+    </div>
+
+
+
+
+
+</div>
+
+
+<button class="blognav rounded float-left" onClick="tick()">
+
+  <i class="mr-2 ml-2 fas fa-bars"></i>
+
+</button>
+
+
+
+

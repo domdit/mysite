@@ -145,8 +145,6 @@ window.onload = function() {
         }
 
         if (scroll >= (contactOff / dist)) {
-            contact.removeClass('my-none');
-            contact.addClass('animated jackInTheBox');
             $('#cont-link').addClass('active');
             $('#port-link').removeClass('active');
             $('#about-link').removeClass('active');

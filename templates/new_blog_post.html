@@ -35,6 +35,30 @@
                         {% endif %}
                     </div>
 
+                    <div class="row mb-1">
+                        <div class="col-md-6">
+                            {{ form.category.label(class="form-control-label") }}
+                            {{ form.category(class="form-control form-control-md") }}
+                            {% if form.category.errors %}
+                                {% for error in form.category.errors %}
+                                    <span class="text-danger">{{ error }}</span></br>
+                                {% endfor %}
+                            {% endif %}
+
+                        </div>
+
+                        <div class="col-md-6">
+                            {{ form.tags.label(class="form-control-label") }}
+                            {{ form.tags(class="form-control form-control-md", placeholder="Separate tags with commas") }}
+                            {% if form.tags.errors %}
+                                {% for error in form.tags.errors %}
+                                    <span class="text-danger">{{ error }}</span></br>
+                                {% endfor %}
+                            {% endif %}
+
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         {{ form.thumb.label() }}
                         {{ form.thumb(class="form-control-file") }}

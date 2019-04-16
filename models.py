@@ -47,11 +47,26 @@ class Testimonial(db.Model):
     folder = db.Column(db.String(200), unique=True, nullable=False)
 
 
+tags = db.Table('tags',
+    db.Column('blog_id', db.Integer, db.ForeignKey('blog.blog_id')),
+    db.Column('tag_id', db.Integer, db.ForeignKey('tag.tag_id'))
+
+)
+
+
 class Blog(db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    blog_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(200), unique=False, nullable=False)
     date = db.Column(db.String(200), unique=False, nullable=False)
     text = db.Column(db.Text)
+    category = db.Column(db.String(200), default='No Category')
+    tags = db.relationship('Tag', secondary=tags,
+                           backref=db.backref('post_tags', lazy='dynamic'))
+
+
+class Tag(db.Model):
+    tag_id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(200))
 
 
 class Comment(db.Model):

@@ -8,22 +8,84 @@
 
 {% block main %}
 
-{% include 'navbar.html' %}
+<div id="blog" class="container" style="padding-top: 20px;">
 
-<div id="blog" class="container" style="padding-top: 100px;">
+    <div class="row">
 
-    {% for post in posts %}
 
-        <div class="blog-post border rounded">
-            <a href="{{url_for('post', post_id=post.id)}}">
-                <h1>{{post.name|safe}}</h1>
-            </a>
-            <small>{{post.date|safe}} by Dominic DiTaranto</small>
-            <hr>
-            {{post.text|safe}}
+        <div class="col-md-8">
+            {% for post in posts.items %}
+
+                <div class="blog-post border rounded">
+                    <a href="{{url_for('post', post_id=post.blog_id)}}">
+                        <h1>{{post.name|safe}}</h1>
+                    </a>
+                    <small>{{post.date|safe}} by Dominic DiTaranto</small>
+                    <hr>
+                    <p class="excerpt">
+                    {{post.text|safe}}
+                    </p>
+                    <center>
+                        <a href="{{url_for('post', post_id=post.blog_id)}}">Continue Reading</a>
+
+                    </center>
+                    <br>
+
+
+                    <small><b>Category</b>:
+                        <a href="{{url_for('query', term=post.category)}}">{{post.category}}</a><br>
+
+                        <b>Tags:</b>
+                            {% for tag in post.tags %}
+                                <a href="{{url_for('query', term=tag.name)}}">{{tag.name}}</a>{%if not loop.last%}, {%else%} {%endif%}
+                            {% endfor %}
+                    </small>
+                </div>
+
+            {% endfor %}
+
+            <div id="paginate">
+
+                {% for page_num in posts.iter_pages() %}
+
+                    {% if page_num %}
+
+
+                        {% if page_num == posts.page %}
+
+                            <a class="btn btn-custom active">{{page_num}}</a>
+
+
+                        {% else %}
+
+                            <a href="{{url_for('blog', page=page_num)}}" class="btn btn-custom">{{page_num}}</a>
+
+
+                        {% endif %}
+
+                    {% else %}
+
+                        {# idk how I want to fill this in yet.. but wont have to for a while so I will deal with it then #}
+
+                    {% endif %}
+
+                {% endfor %}
+
+            </div>
+
+
         </div>
 
-    {% endfor %}
+        <div class="col-md-4">
+
+            {% include 'sidebar.html' %}
+
+        </div>
+
+    </div>
+
+
+
 
 </div>
 

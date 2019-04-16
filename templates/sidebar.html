@@ -1,0 +1,117 @@
+<div class="blog-post rounded">
+    <center>
+        <a href="/"><h2>DOMDIT.COM</h2></a>
+    </center>
+
+    <form method="POST" action="" class="mt-3">
+        {{ search_form.hidden_tag() }}
+
+
+                <div class="form-group">
+                    {{ search_form.term(class="form-control form-control-sm", placeholder="Search") }}
+                    {% if search_form.term.errors %}
+                        {% for error in search_form.term.errors %}
+                            <span class="text-danger">{{ error }}</span></br>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+
+        <div class="form-group">
+            {{ search_form.submit(class="d-none btn btn-outline-info") }}
+        </div>
+
+    </form>
+
+    <p style="line-height:1em;">
+
+        Hello, my name is Dominic DiTaranto. To get to know more about me,
+        check out my website's homepage <a href="/">here</a>.
+        I am planning to blog about a variety of topics, including:
+        my adventures in web development and programming in general;
+        research and translations regarding Medieval China, the Manchu People, religion, Japan, etc.;
+        new music that I record; as well as my personal life and photography.
+
+    </p>
+
+    <div class="row mt-3">
+        <div class="col-4">
+            <center>
+                <a href="{{url_for('index')}}"><i style="font-size:1.7em;" class="abt-btn fas fa-briefcase"></i></a>
+                <br> Portfolio
+
+            </center>
+
+
+        </div>
+
+        <div class="col-4">
+            <center>
+                <a href="{{ url_for('static', filename='Dominic_DiTaranto_Resume_2019.pdf') }}"><i style="font-size:1.7em;" class="abt-btn fas fa-file"></i></a>
+                <br> Resume
+            </center>
+        </div>
+
+        <div class="col-4">
+            <center>
+                <a href="/#contact"><i style="font-size:1.7em;" class="abt-btn fas fa-envelope"></i></a>
+                <br> Contact
+            </center>
+        </div>
+
+    </div>
+
+    <hr>
+
+
+
+    <h5 style="margin-bottom: 0px;">Recent Categories:</h5>
+        {% for category in categories%}
+            <li style="margin-bottom: -5px;">
+                <a href="{{url_for('query', term=category.category)}}">
+                    {{category.category}}
+                </a>
+            </li>
+        {% endfor %}
+
+    <br>
+
+    <h5 style="margin-bottom: 0px;">Recent Tags:</h5>
+        {% for tag in tags %}
+            <a href="{{url_for('query', term=tag.name)}}">
+                {{tag.name}}
+
+            </a>
+
+
+        {%endfor%}
+
+    <hr>
+
+    <h4>Recent Posts:</h4>
+<!--    <hr class="posts" style="margin:3px;">-->
+    {% for post in recent_posts %}
+
+        {% if post %}
+
+        <a href="{{url_for('post', post_id=post.blog_id)}}">
+            <h5 class="recent_posts"  style="margin-bottom: -8px; font-size: 1.15em;">{{post.name}}</h5>
+
+        </a>
+
+
+
+        <small>
+            {{post.date}}
+        </small>
+        <hr class="posts">
+
+        {% endif %}
+
+
+    {% endfor %}
+
+
+
+
+</div>
