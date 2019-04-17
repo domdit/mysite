@@ -264,9 +264,8 @@ def post(post_id):
 
     if request.method == 'POST':
         if form.comment_submit.data:
-            if recaptcha.verify():
-                if form.validate_on_submit():
-
+            if form.validate_on_submit:
+                if recaptcha.verify():
 
                     comment = Comment(name=form.name.data,
                                       date=date,
