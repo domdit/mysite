@@ -275,7 +275,7 @@ def post(post_id):
                                       )
                     db.session.add(comment)
                     db.session.commit()
-    
+
                     msg = Message("New comment from domdit.com!", sender='customer@domdit.com', recipients=['me@domdit.com'])
                     msg.body = '''
                                         From: %s <%s>
