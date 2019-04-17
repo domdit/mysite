@@ -66,7 +66,7 @@ def login():
     if current_user.is_authenticated:
         return redirect(url_for('portfolio'))
 
-    elif form.validate_on_submit():
+    elif form.validate_on_submit:
         user = User.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user)
@@ -87,7 +87,7 @@ def logout():
 def new_admin():
 
     form = AdminForm()
-    if form.validate_on_submit():
+    if form.validate_on_submit:
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         email = form.email.data
         user = User(email=email, password=hashed_password)
@@ -109,7 +109,7 @@ def portfolio():
 
         print(form.errors)
 
-        if form.validate_on_submit():
+        if form.validate_on_submit:
             portfolio_item = Portfolio(name=form.name.data,
                                        languages=form.languages.data,
                                        short_description=form.short_description.data,
@@ -151,7 +151,7 @@ def testimonial():
 
         print(form.errors)
 
-        if form.validate_on_submit():
+        if form.validate_on_submit:
             testimonial_item = Testimonial(name=form.name.data,
                                            site_name=form.site_name.data,
                                            portfolio_id=form.portfolio_id.data,
@@ -185,7 +185,7 @@ def new_blog_post():
 
         print(form.errors)
 
-        if form.validate_on_submit():
+        if form.validate_on_submit:
             blog_post = Blog(name=form.post_name.data,
                              date=date,
                              text=form.content.data,
@@ -209,7 +209,7 @@ def update(post_id):
     form = NewBlogPost()
     post = Blog.query.get_or_404(post_id)
 
-    if form.validate_on_submit():
+    if form.validate_on_submit:
         post.name = form.post_name.data
         post.text = form.content.data
         db.session.commit()
@@ -233,7 +233,7 @@ def blog():
     categories = Blog.query.group_by(Blog.category).limit(5).all()
     tags = Tag.query.group_by(Tag.name).limit(25).all()
     search_form = Search()
-    if search_form.validate_on_submit():
+    if search_form.validate_on_submit:
         return redirect(url_for('query', term=search_form.term.data))
 
 
@@ -345,7 +345,7 @@ def query(term):
     categories = Blog.query.group_by(Blog.category).limit(5).all()
     tags = Tag.query.group_by(Tag.name).limit(25).all()
     search_form = Search()
-    if search_form.validate_on_submit():
+    if search_form.validate_on_submit:
         return redirect(url_for('query', term=search_form.term.data))
 
 
