@@ -86,6 +86,8 @@ def logout():
 @login_required
 def new_admin():
 
+    tinymce = os.getenv('TINYMCE_API_KEY')
+
     form = AdminForm()
     if form.validate_on_submit:
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
@@ -97,11 +99,13 @@ def new_admin():
         return redirect(url_for('new_admin'))
 
     return render_template('new_user.html', title='Manage Admins - DOMDIT.COM',
-                           form=form)
+                           form=form, tinymce=tinymce)
 
 @app.route('/admin/portfolio', methods=['GET', 'POST'])
 @login_required
 def portfolio():
+
+    tinymce = os.getenv('TINYMCE_API_KEY')
 
     form = PortfolioForm()
 
@@ -138,12 +142,14 @@ def portfolio():
 
     items = Portfolio.query.all()
 
-    return render_template('portfolio.html', form=form, items=items)
+    return render_template('portfolio.html', form=form, items=items, tinymce=tinymce)
 
 
 @app.route('/admin/testimonial', methods=['GET', 'POST'])
 @login_required
 def testimonial():
+
+    tinymce = os.getenv('TINYMCE_API_KEY')
 
     form = TestimonialForm()
 
@@ -170,11 +176,13 @@ def testimonial():
     test_items = Testimonial.query.all()
 
 
-    return render_template('testimonial.html', form=form, test_items=test_items)
+    return render_template('testimonial.html', form=form, test_items=test_items, tinymce=tinymce)
 
 @app.route("/admin/new_blog_post", methods=['GET', 'POST'])
 @login_required
 def new_blog_post():
+
+    tinymce = os.getenv('TINYMCE_API_KEY')
 
     form = NewBlogPost()
 
@@ -198,10 +206,12 @@ def new_blog_post():
 
             return redirect(url_for('post', post_id=blog_post.blog_id))
 
-    return render_template('new_blog_post.html', form=form, legend="New Blog Post")
+    return render_template('new_blog_post.html', form=form, legend="New Blog Post", tinymce=tinymce)
 
 @app.route("/admin/post/<int:post_id>/update", methods=['GET', 'POST'])
 def update(post_id):
+
+    tinymce = os.getenv('TINYMCE_API_KEY')
 
     if not current_user.is_authenticated:
         redirect(url_for('login'))
@@ -218,12 +228,13 @@ def update(post_id):
     form.post_name.data = post.name
     form.content.data = post.text
 
-    return render_template('new_blog_post.html', form=form, legend="Update Blog Post")
+    return render_template('new_blog_post.html', form=form, legend="Update Blog Post", tinymce=tinymce)
 
 
 
 @app.route("/blog", methods=['GET', 'POST'])
 def blog():
+    tinymce = os.getenv('TINYMCE_API_KEY')
 
     page = request.args.get('page', 1, type=int)
     posts = Blog.query.order_by(Blog.date.desc()).paginate(page=page, per_page=5)
@@ -239,10 +250,12 @@ def blog():
 
 
     return render_template('blog.html', posts=posts, title="Blog - Dominic DiTaranto", search_form=search_form,
-                           recent_posts=recent_posts, categories=categories, tags=tags)
+                           recent_posts=recent_posts, categories=categories, tags=tags, tinymce=tinymce)
 
 @app.route("/blog/post/<int:post_id>", methods=['GET', 'POST'])
 def post(post_id):
+    tinymce = os.getenv('TINYMCE_API_KEY')
+
     post = Blog.query.get_or_404(post_id)
 
     prev = post_id - 1
@@ -306,11 +319,13 @@ def post(post_id):
 
     return render_template('post.html', post=post, prev_post=prev_post, next_post=next_post,
                            title=post.name, search_form=search_form, form=form, comments=comments, count=count,
-                           recent_posts=recent_posts, categories=categories, tags=tags)
+                           recent_posts=recent_posts, categories=categories, tags=tags, tinymce=tinymce)
 
 
 @app.route('/blog/query/<term>', methods=['GET', 'POST'])
 def query(term):
+
+    tinymce = os.getenv('TINYMCE_API_KEY')
 
     tag_query = Tag.query.filter_by(name=term).all()
     text_query = Blog.query.filter((Blog.text.contains(term)) | (Blog.name.contains(term)) | Blog.category.contains(term)).all()
@@ -350,7 +365,8 @@ def query(term):
 
 
     return render_template('query.html', tag_posts=tag_posts, search_form=search_form,
-                           recent_posts=recent_posts, categories=categories, tags=tags)
+                           recent_posts=recent_posts, categories=categories, tags=tags,
+                           tinymce=tinymce)
 
 
 @app.route("/item/<int:item_id>/<table>/<location>/delete", methods=['GET', 'POST'])
