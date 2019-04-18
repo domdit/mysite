@@ -105,7 +105,7 @@ def new_admin():
 @login_required
 def portfolio():
 
-    tinymce = 'https://cloud.tinymce.com/5/tinymce.min.js?apiKey' + os.getenv('TINYMCE_API_KEY')
+    tinymce = 'https://cloud.tinymce.com/5/tinymce.min.js?apiKey=' + os.getenv('TINYMCE_API_KEY')
 
     form = PortfolioForm()
 
