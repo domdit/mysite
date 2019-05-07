@@ -20,6 +20,7 @@ $(document).ready(function() {
 
         //portfolio section
         var portfolioHeader = $('#work-head');
+        var portfolioLink = $('#port-link-view');
         var portfolioItem1 = $('#port-1');
         var portfolioItem2 = $('#port-2');
         var portfolioItem3 = $('#port-3');
@@ -126,6 +127,7 @@ $(document).ready(function() {
 
         if (scroll >= (portOff / (dist + 0.2 ))) {
             portfolioHeader.removeClass('my-none');
+            portfolioLink.removeClass('my-none');
             portfolioItem1.removeClass('my-none');
             portfolioItem1.addClass('animated flipInY');
 

@@ -173,7 +173,7 @@
 
         {% for item in items %}
 
-        {% if loop.index is divisibleby 3 %}
+        {% if loop.index is divisibleby 4 %}
 
             </div>
 
@@ -202,7 +202,17 @@
                     </div>
                 </div>
 
-                <a href="{{ url_for('delete_item', item_id=item.id, table='PortfolioItem', location='portfolio') }}">Delete</a>
+                <div class="float-left mr-5">
+                    <a href="{{ url_for('delete_item', item_id=item.id, table='PortfolioItem', location='portfolio') }}">Delete</a>
+                    |
+                    <a href="{{ url_for('edit_portfolio', item_id=item.id) }}">Edit</a>
+                </div>
+
+                <div class="float-left">
+                    <a href="{{ url_for('rearrange', item_id=item.id, direc='left') }}"><</a>
+                    <a href="{{ url_for('rearrange', item_id=item.id, direc='right') }}">></a>
+
+                </div>
 
                 <div class="modal fade" id="modal_{{item.id}}" tabindex="-1" role="dialog" aria-labelledby="modal1" aria-hidden="true">
 
@@ -241,11 +251,11 @@
 
                                 <hr>
                                 <h1>{{item.name}}</h1>
-                                <h2>{{item.short_description}}</h2>
+                                <h2>{{item.short_description|safe}}</h2>
                                 <hr>
 
                                 <p>
-                                    {{item.description}}
+                                    {{item.description|safe}}
                                 </p>
 
                                 <a class="btn btn-custom" href="{{item.url}}" target="_blank">Visit Site</a>

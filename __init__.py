@@ -14,8 +14,8 @@ app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 app.config["MAIL_SERVER"] = "smtp.dreamhost.com"
 app.config["MAIL_PORT"] = 465
 app.config["MAIL_USE_SSL"] = True
-app.config["MAIL_USERNAME"] = os.getenv('EMAIL_USER')
-app.config["MAIL_PASSWORD"] = os.getenv('EMAIL_PASS')
+app.config["MAIL_USERNAME"] = os.getenv('MAIL_USER')
+app.config["MAIL_PASSWORD"] = os.getenv('MAIL_PASS')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
