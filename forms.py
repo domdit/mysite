@@ -61,3 +61,10 @@ class TestimonialForm(FlaskForm):
     portfolio_id = IntegerField('Portfolio ID #:', validators=[DataRequired()])
     folder = StringField('Image Folder Name:', validators=[DataRequired()])
     submit = SubmitField('Submit')
+
+
+class ResumeForm(FlaskForm):
+    file = FileField('Resume:', validators=[FileAllowed(['pdf'])])
+    submit = SubmitField('Submit')
+
+

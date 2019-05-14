@@ -2,7 +2,7 @@ from flask import render_template, request, flash, redirect, url_for, current_ap
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
 from domdit import app, mail, db, bcrypt, login_manager, recaptcha
-from domdit.forms import Email, PortfolioForm, AdminForm, Login, TestimonialForm
+from domdit.forms import Email, PortfolioForm, AdminForm, Login, TestimonialForm, ResumeForm
 from domdit.models import Portfolio, User, Testimonial
 from domdit.utils import portfolio_img_uploader
 import shutil
@@ -147,6 +147,31 @@ def portfolio():
     items = Portfolio.query.order_by(Portfolio.rank.asc()).all()
 
     return render_template('portfolio.html', form=form, items=items)
+
+
+@app.route('/admin/resume', methods=['GET', 'POST'])
+@login_required
+def resume():
+    form = ResumeForm()
+    if request.method == 'POST':
+        if form.validate_on_submit():
+
+            file_path = os.path.join(current_app.root_path, '/static/Dominic DiTaranto - Resume')
+
+            if os.path.isfile(file_path):
+                os.remove(file_path)
+
+            file = request.files['file']
+
+            file_folder = os.path.join(current_app.root_path, 'static/')
+
+            file.save(os.path.join(file_folder, 'Dominic DiTaranto - Resume.pdf'))
+
+            flash('Resume successfully uploaded!')
+
+            return redirect(url_for('resume'))
+
+    return render_template('resume.html', form=form)
 
 
 @app.route('/admin/portfolio/edit/<int:item_id>', methods=['GET', 'POST'])
