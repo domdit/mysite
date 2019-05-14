@@ -165,7 +165,7 @@ def resume():
 
             file_folder = os.path.join(current_app.root_path, 'static/')
 
-            file.save(os.path.join(file_folder, 'Dominic DiTaranto - Resume.pdf'))
+            file.save(os.path.join(file_folder, 'Dominic_DiTaranto_-_Resume.pdf'))
 
             flash('Resume successfully uploaded!')
 
