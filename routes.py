@@ -300,3 +300,6 @@ def delete_item(item_id, table, location):
     flash(msg, 'success')
     return redirect(url_for(location))
 
+@app.route("/jefimovas")
+def jef():
+    return render_template('jef.html')
