@@ -108,9 +108,11 @@
                                         <h2 class="text-left">{{item.short_description}}</h2>
                                         <hr>
 
-                                        <p class="text-left">
-                                            {{item.description|safe}}
-                                        </p>
+                                        <div class="text-left">
+                                                <p class="text-left">
+                                                    {{item.description|safe}}
+                                                </p>
+                                            </div>
 
                                         <a class="btn btn-custom" href="{{item.url}}" target="_blank">Visit Site</a>
                                         <a class="btn btn-dark" href="{{item.git}}" target="_blank">View on Github</a>
