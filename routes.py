@@ -291,6 +291,11 @@ def delete_item(item_id, table, location):
         path = os.path.join(current_app.root_path, 'static/img/portfolio', item.folder)
         shutil.rmtree(path)
         msg = "You Portfolio Item has been successfully deleted!"
+    elif table == 'TestItem':
+        item = Testimonial.query.get_or_404(item_id)
+        msg = "You Testimonial Item has been successfully deleted!"
+
+
     else:
         flash('Delete failed, try again', 'danger')
         return redirect(url_for(location))
